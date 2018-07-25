@@ -13,7 +13,9 @@ class App extends React.Component {
       {_id: 'a third object id', itemName: 'neon green hair tie'}
     ];
     this.handleClick = () => {
-      alert("I've been clicked!");
+      alert(`I've been clicked with ${this.state.submitFormText}`);
+      this.setState({submitFormText: ''});
+
     }
     this.handleSubmitFormTextChange = (event) => {
       this.setState({submitFormText: event.target.value})
@@ -26,7 +28,7 @@ class App extends React.Component {
         <ItemSubmitForm
           handleClick={this.handleClick}
           handleChange={this.handleSubmitFormTextChange}
-          submitFormText={this.state.submitFormText}
+          value={this.state.submitFormText}
         />
         <ItemList itemsData={this.data}/>
       </div>

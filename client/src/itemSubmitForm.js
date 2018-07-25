@@ -8,7 +8,8 @@ class ItemSubmitForm extends React.Component {
             className="ItemInput"
             placeholder="Please type in the item name here"
             onChange={this.props.handleChange}
-          >{this.props.submitFormText}
+            value={this.props.value}
+          >
           </textarea>
 
           <button
