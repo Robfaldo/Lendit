@@ -19,7 +19,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 const Item = mongoose.model('Item');
 
 app.get('/api/items', async (req, res) => {
-  const items = await Item.find();
+  const items = await Item.find().sort({dateAdded:-1});
   res.json(items)
 });
 

@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 const ItemSchema = new mongoose.Schema({
   itemName: {
     type: String
+  },
+  dateAdded: {
+    type: Date,
+    default: Date.now
   }
 });
 
