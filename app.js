@@ -1,6 +1,13 @@
 var mongoose = require('mongoose');
 
-var mongoDB = `mongodb://${process.env.DB_USERNAME}:${process.env.DB_Password}@ds247001.mlab.com:47101/lendit-test`
+const databases = {
+  'lendit-test': 47101,
+  'lendit-prod': 47171,
+  'lendit-dev': 47001
+}
+const env = process.env.NODE_ENV || 'lendit-dev';
+
+var mongoDB = `mongodb://${process.env.DB_USERNAME}:${process.env.DB_Password}@ds247001.mlab.com:${databases[env.toString()]}/${env}`
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
