@@ -1,3 +1,6 @@
+const express = require('express');
+const app = express();
+
 var mongoose = require('mongoose');
 
 const databases = {
@@ -12,3 +15,15 @@ mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+const Item = mongoose.model('Item');
+
+app.get('/api/items', async (req, res) => {
+  const items = await Item.find();
+  res.json(items)
+});
+
+const port = process.env.PORT || 5000;
+app.listen(port);
+
+module.exports = app;

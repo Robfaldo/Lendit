@@ -1,21 +1,19 @@
 const {assert} = require('chai');
 const request = require('supertest');
 const app = require('../../app');
+const Item = require('../../models/item');
 
 describe('Server path /api/items', () => {
   describe('GET', () => {
-    it('returns json array of items', async () => {
-      // setup
-      const expectedResponse = [{
-        itemName: "Scissors"
-      }]
+    it('returns single item as JSON array', async () => {
       const item = new Item({itemName: 'Scissors'});
       item.save();
-      // exercise
+
       const response = await request(app)
         .get('/api/items')
-      // verify
-      assert.include(response.text, expectedResponse.itemName)
+
+      const responseFirstItemName = JSON.parse(response.text)[0].itemName;
+      assert.equal(responseFirstItemName, item.itemName)
     });
   });
 });
