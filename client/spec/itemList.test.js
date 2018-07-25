@@ -23,12 +23,12 @@ describe('ItemList', () => {
     expect(itemList.find('Item').length).toEqual(3);
   })
 
-  it('reverse order - the last item is shown first', () => {
+  it('the Items should have the right props', () => {
     let item1 = toJSON(itemList.find('Item'))[0].props.itemName;
     let item2 = toJSON(itemList.find('Item'))[1].props.itemName;
     let item3 = toJSON(itemList.find('Item'))[2].props.itemName;
-    expect(item1).toBe('neon green hair tie');
+    expect(item1).toBe('ostrich egg');
     expect(item2).toBe('iPhone charger cable');
-    expect(item3).toBe('ostrich egg');
+    expect(item3).toBe('neon green hair tie');
   })
 })

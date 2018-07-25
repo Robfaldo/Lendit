@@ -12,7 +12,7 @@ class ItemList extends React.Component {
   render() {
     return (
       <ul>
-        {this.props.itemsData.reverse().map(this.renderItem)}
+        {this.props.itemsData.map(this.renderItem)}
       </ul>
     )
   }
