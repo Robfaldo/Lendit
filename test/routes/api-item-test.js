@@ -1,8 +1,9 @@
 const {assert} = require('chai');
 const request = require('supertest');
-const app = require('../../app');
-const Item = require('../../models/item');
 const mongoose = require('mongoose');
+const Item = require('../../models/item');
+const app = require('../../app');
+
 
 describe('Server path /api/items', () => {
 

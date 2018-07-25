@@ -16,6 +16,7 @@ mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+require('./models/item')
 const Item = mongoose.model('Item');
 
 app.get('/api/items', async (req, res) => {
