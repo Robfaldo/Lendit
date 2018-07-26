@@ -33,10 +33,14 @@ app.get('/api/items', async (req, res) => {
 
 
 app.post('/api/items', async (req, res, next) => {
-  const itemToCreate = { itemName: req.body.itemName }
-  const newItem = new Item(itemToCreate)
-  await newItem.save()
-  next();
+    const itemToCreate = { itemName: req.body.itemName }
+    const newItem = new Item(itemToCreate)
+    await newItem.save()
+    next();
+    res.send({
+        success: true,
+        message: 'Listing created'
+    });
 });
 
 const port = process.env.PORT || 5000;
