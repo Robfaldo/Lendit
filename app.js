@@ -19,16 +19,13 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 require('./models/item')
 const Item = mongoose.model('Item');
 
-app.use(express.json());
 
 app.get('/api/items', async (req, res) => {
     const items = await Item.findAllAndReverse();
     res.json(items)
 });
 
-app.post('/api/items', async (req, res) => {
-    console.log(req.body);
-});
+
 
 const port = process.env.PORT || 5000;
 app.listen(port);
