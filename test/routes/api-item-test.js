@@ -31,9 +31,9 @@ describe('Server path /api/items', () => {
       const item1 = new Item({itemName: 'Ostrich Egg', dateAdded: '2018-07-25T16:49:16.515Z'});
       const item2 = new Item({itemName: 'Tennis ball', dateAdded: '2018-07-24T16:49:16.515Z'});
       const item3 = new Item({itemName: 'Pet food', dateAdded: '2018-07-23T16:49:16.515Z'});
-      item1.save();
-      item2.save();
-      item3.save();
+      await item1.save();
+      await item2.save();
+      await item3.save();
 
       const response = await request(app)
         .get('/api/items')
