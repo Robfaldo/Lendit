@@ -1,5 +1,11 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+
 const app = express();
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: false}));
+
 
 var mongoose = require('mongoose');
 
@@ -22,6 +28,13 @@ const Item = mongoose.model('Item');
 app.get('/api/items', async (req, res) => {
   const items = await Item.findAllAndReverse();
   res.json(items)
+});
+
+app.post('/api/listings', (req, res, next) => {
+  const itemToCreate = { itemName: req.body.itemName }
+  const newItem = new Item(itemToCreate)
+  newItem.save()
+  next();
 });
 
 const port = process.env.PORT || 5000;

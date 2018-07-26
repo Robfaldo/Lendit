@@ -1,9 +1,9 @@
 const {assert} = require('chai');
 const request = require('supertest');
-const mongoose = require('mongoose');
-const Item = require('../../models/item');
-const app = require('../../app');
 
+const mongoose = require('mongoose');
+const app = require('../../app');
+const Item = require('../../models/item');
 
 describe('Server path /api/items', () => {
 
@@ -43,6 +43,21 @@ describe('Server path /api/items', () => {
       assert.equal(responseJson[0].itemName, item1.itemName)
       assert.equal(responseJson[1].itemName, item2.itemName)
       assert.equal(responseJson[2].itemName, item3.itemName)
+    });
+  });
+  describe('POST', () => {
+    it('adds an item to the database', async () => {
+      const itemToCreate = { itemName: "Scissors" };
+
+      const response = await request(app)
+        .post('/api/listings')
+        .type('form')
+        .send(itemToCreate)
+
+      const databaseResponse = await Item.find();
+      const itemInDatabase = databaseResponse[0].itemName
+
+      assert.equal(itemInDatabase, itemToCreate.itemName);
     });
   });
 });
