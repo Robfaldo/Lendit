@@ -13,14 +13,17 @@ describe('Item', () => {
     await mongoose.disconnect();
   });
 
-  describe('when created', () => {
-    it('gets stored in the database', async () => {
-      const item = new Item({itemName: 'Scissors'});
-      item.save()
+  describe('#save', () => {
+    it('it persists', async () => {
+      const exampleItem = {
+        itemName: 'Scissors'
+      }
 
+      const item = new Item(exampleItem);
+      item.save();
       const databaseResponse = await Item.find();
 
-      assert.deepEqual(databaseResponse[0].itemName, item.itemName);
+      assert.equal(databaseResponse[0].itemName, exampleItem.itemName);
     });
   });
   describe('When returning items', () => {
