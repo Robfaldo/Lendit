@@ -50,7 +50,7 @@ describe('Server path /api/items', () => {
       const itemToCreate = { itemName: "Scissors" };
 
       const response = await request(app)
-        .post('/api/listings')
+        .post('/api/items')
         .type('form')
         .send(itemToCreate)
 

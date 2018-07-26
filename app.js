@@ -30,7 +30,7 @@ app.get('/api/items', async (req, res) => {
   res.json(items)
 });
 
-app.post('/api/listings', (req, res, next) => {
+app.post('/api/items', async (req, res, next) => {
   const itemToCreate = { itemName: req.body.itemName }
   const newItem = new Item(itemToCreate)
   await newItem.save()
