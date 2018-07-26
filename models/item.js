@@ -10,4 +10,10 @@ const ItemSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('Item', ItemSchema);
+var Item = mongoose.model('Item', ItemSchema);
+
+Item.findAllAndReverse = function() {
+  return Item.find().sort({dateAdded:-1})
+}
+
+module.exports = Item;

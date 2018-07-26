@@ -29,13 +29,13 @@ describe('Item', () => {
   describe('When returning items', () => {
     it('returns them in reverse-chronological order', async () => {
       const item1 = new Item({itemName: 'Ostrich Egg', dateAdded: '2018-07-25T16:49:16.515Z'});
-      const item2 = new Item({itemName: 'Tennis ball', dateAdded: '2018-07-24T16:49:16.515Z'});
-      const item3 = new Item({itemName: 'Pet food', dateAdded: '2018-07-23T16:49:16.515Z'});
+      const item2 = new Item({itemName: 'Tennis ball', dateAdded: '2017-07-24T16:49:16.515Z'});
+      const item3 = new Item({itemName: 'Pet food', dateAdded: '2016-07-23T16:49:16.515Z'});
       item1.save();
       item2.save();
       item3.save();
 
-      const databaseResponse = await Item.find();
+      const databaseResponse = await Item.findAllAndReverse();
 
       assert.equal(databaseResponse[0].itemName, item1.itemName);
       assert.equal(databaseResponse[1].itemName, item2.itemName);

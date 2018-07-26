@@ -38,7 +38,7 @@ describe('Server path /api/items', () => {
       const response = await request(app)
         .get('/api/items')
 
-      const responseJson = JSON.parse(response.text)
+      const responseJson = JSON.parse(response.text);
 
       assert.equal(responseJson[0].itemName, item1.itemName)
       assert.equal(responseJson[1].itemName, item2.itemName)

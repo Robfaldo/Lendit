@@ -20,7 +20,7 @@ require('./models/item')
 const Item = mongoose.model('Item');
 
 app.get('/api/items', async (req, res) => {
-  const items = await Item.find().sort({dateAdded:-1});
+  const items = await Item.findAllAndReverse();
   res.json(items)
 });
 
