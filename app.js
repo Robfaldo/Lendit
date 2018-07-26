@@ -4,9 +4,9 @@ const app = express();
 var mongoose = require('mongoose');
 
 const databases = {
-  'lendit-test': 47101,
-  'lendit-prod': 47171,
-  'lendit-dev': 47001
+    'lendit-test': 47101,
+    'lendit-prod': 47171,
+    'lendit-dev': 47001
 }
 const env = process.env.NODE_ENV || 'lendit-dev';
 
@@ -22,12 +22,12 @@ const Item = mongoose.model('Item');
 app.use(express.json());
 
 app.get('/api/items', async (req, res) => {
-  const items = await Item.findAllAndReverse();
-  res.json(items)
+    const items = await Item.findAllAndReverse();
+    res.json(items)
 });
 
 app.post('/api/items', async (req, res) => {
-  console.log(req.body);
+    console.log(req.body);
 });
 
 const port = process.env.PORT || 5000;

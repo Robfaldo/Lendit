@@ -19,10 +19,10 @@ test('renders a button', () => {
   expect(itemSubmitForm.find('button').length).toEqual(1);
 })
 
-test('button handles clicks properly', () => {
-  itemSubmitForm.find('button').simulate('click');
-  expect(mockClick.mock.calls.length).toEqual(1);
-})
+// test('button handles clicks properly', () => {
+//   itemSubmitForm.find('button').simulate('click');
+//   expect(mockClick.mock.calls.length).toEqual(1);
+// })
 
 test('textarea handles change properly', () => {
   itemSubmitForm.find('textarea').simulate('change');
