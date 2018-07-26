@@ -2,7 +2,7 @@ import React from 'react';
 import Enzyme from 'enzyme';
 import toJSON from 'enzyme-to-json';
 import Adapter from 'enzyme-adapter-react-16';
-import ListingsPage from '../src/listingsPage';
+import ListingsPage from '../src/components/listingsPage';
 
 Enzyme.configure({adapter: new Adapter()});
 

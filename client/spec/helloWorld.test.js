@@ -1,7 +1,7 @@
 import React from 'react';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import HelloWorld from '../src/helloWorld';
+import HelloWorld from '../src/components/helloWorld';
 
 Enzyme.configure({adapter: new Adapter()});
 
