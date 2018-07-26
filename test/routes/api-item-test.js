@@ -19,7 +19,7 @@ describe('Server path /api/items', () => {
   describe('GET', () => {
     it('returns single item as JSON array', async () => {
       const item = new Item({itemName: 'Scissors'});
-      item.save();
+      await item.save();
 
       const response = await request(app)
         .get('/api/items')

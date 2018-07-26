@@ -33,7 +33,7 @@ app.get('/api/items', async (req, res) => {
 app.post('/api/listings', (req, res, next) => {
   const itemToCreate = { itemName: req.body.itemName }
   const newItem = new Item(itemToCreate)
-  newItem.save()
+  await newItem.save()
   next();
 });
 
