@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "node app.js",
-    "heroku-postbuild": "cd client && npm install && npm run build && export NODE_ENV='lendit-prod'",
+    "heroku-postbuild": "export NODE_ENV='lendit-prod' && cd client && npm install && npm run build",
     "test": "export NODE_ENV='lendit-test' && mocha --recursive --exit && export NODE_ENV=undefined"
   },
   "repository": {
