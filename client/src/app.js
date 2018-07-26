@@ -42,7 +42,8 @@ class App extends React.Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(item)
-        })};
+        }).then(() => this.getItems());
+    };
 
     componentDidMount() {
         this.getItems();
