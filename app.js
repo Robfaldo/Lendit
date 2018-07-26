@@ -10,9 +10,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 var mongoose = require('mongoose');
 
 const databases = {
-  'lendit-test': 47101,
-  'lendit-prod': 47171,
-  'lendit-dev': 47001
+    'lendit-test': 47101,
+    'lendit-prod': 47171,
+    'lendit-dev': 47001
 }
 const env = process.env.NODE_ENV || 'lendit-dev';
 
@@ -25,10 +25,12 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 require('./models/item')
 const Item = mongoose.model('Item');
 
+
 app.get('/api/items', async (req, res) => {
-  const items = await Item.findAllAndReverse();
-  res.json(items)
+    const items = await Item.findAllAndReverse();
+    res.json(items)
 });
+
 
 app.post('/api/items', async (req, res, next) => {
   const itemToCreate = { itemName: req.body.itemName }
