@@ -1,10 +1,12 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 
 const app = express();
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 
 var mongoose = require('mongoose');
@@ -55,6 +57,10 @@ app.post('/api/items', async (req, res, next) => {
         success: true,
         message: 'Listing created'
     });
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
 const port = process.env.PORT || 5000;
