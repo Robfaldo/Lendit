@@ -6,7 +6,6 @@ import ListingsPage from '../src/components/listingsPage';
 
 Enzyme.configure({adapter: new Adapter()});
 
-// test("tst", () => expect(1).toEqual(1));
 describe('ListingsPage, shallow render', () => {
   const data = [
     {_id: 'some sort of object id', itemName: 'ostrich egg'},

@@ -19,8 +19,10 @@ test('renders a button', () => {
   expect(itemSubmitForm.find('button').length).toEqual(1);
 })
 
+// figure this out for the future:
+// form submit cannot be tested easily; only button clicks can
 // test('button handles clicks properly', () => {
-//   itemSubmitForm.find('button').simulate('click');
+//   itemSubmitForm.find('ItemSubmitForm').simulate('submit');
 //   expect(mockClick.mock.calls.length).toEqual(1);
 // })
 
