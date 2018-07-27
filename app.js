@@ -18,13 +18,13 @@ const db_env = process.env.DB_ENV || 'production';
 
 let mongoDB;
 if (db_env === 'production') {
-  mongoDB = databasesURLs.lendit-prod;
+  mongoDB = databasesURLs['lendit-prod'];
 }
 else if (db_env === 'development') {
-  mongoDB = databasesURLs.lendit-dev;
+  mongoDB = databasesURLs['lendit-dev'];
 }
 else if (db_env === 'test') {
-  mongoDB = databasesURLs.lendit-test;
+  mongoDB = databasesURLs['lendit-test'];
 }
 else {
   // just for debugging!
