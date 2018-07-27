@@ -38,9 +38,11 @@ mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-require('./models/item')
+require('./models/item');
 const Item = mongoose.model('Item');
 
+require('./models/user');
+const User = mongoose.model('User');
 
 app.get('/api/items', async (req, res) => {
     const items = await Item.findAllAndReverse();
@@ -49,9 +51,9 @@ app.get('/api/items', async (req, res) => {
 
 
 app.post('/api/items', async (req, res, next) => {
-    const itemToCreate = { itemName: req.body.itemName }
-    const newItem = new Item(itemToCreate)
-    await newItem.save()
+    const itemToCreate = { itemName: req.body.itemName };
+    const newItem = new Item(itemToCreate);
+    await newItem.save();
     res.send({
         success: true,
         message: 'Listing created'
