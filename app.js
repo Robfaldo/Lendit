@@ -16,7 +16,7 @@ const databasesURLs = {
 }
 const db_env = process.env.DB_ENV || 'production';
 
-const mongoDB;
+let mongoDB;
 if (db_env === 'production') {
   mongoDB = databasesURLs.lendit-prod;
 }
