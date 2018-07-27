@@ -5,10 +5,10 @@ import ItemSubmitForm from '../src/components/itemSubmitForm';
 
 Enzyme.configure({adapter: new Adapter()});
 
-const mockClick = jest.fn();
+const mockSubmit = jest.fn();
 const mockTextChange = jest.fn();
 const itemSubmitForm = Enzyme.shallow(
-  <ItemSubmitForm handleClick={mockClick} handleChange={mockTextChange} />
+  <ItemSubmitForm handleSubmit={mockSubmit} handleChange={mockTextChange} />
 );
 
 test('renders a text field', () => {
@@ -19,12 +19,10 @@ test('renders a button', () => {
   expect(itemSubmitForm.find('button').length).toEqual(1);
 })
 
-// figure this out for the future:
-// form submit cannot be tested easily; only button clicks can
-// test('button handles clicks properly', () => {
-//   itemSubmitForm.find('ItemSubmitForm').simulate('submit');
-//   expect(mockClick.mock.calls.length).toEqual(1);
-// })
+test('button handles clicks properly', () => {
+  itemSubmitForm.find('form').simulate('submit');
+  expect(mockSubmit.mock.calls.length).toEqual(1);
+})
 
 test('textarea handles change properly', () => {
   itemSubmitForm.find('textarea').simulate('change');
