@@ -20,7 +20,7 @@
   "scripts": {
     "start": "node app.js",
     "heroku-postbuild": "export NODE_ENV='lendit-prod' && cd client && npm install && npm run build",
-    "test": "export NODE_ENV='lendit-test' && mocha --recursive --exit && export NODE_ENV=undefined"
+    "test": "export DB_ENV='test' && mocha --recursive --exit && export DB_ENV=development"
   },
   "repository": {
     "type": "git",
