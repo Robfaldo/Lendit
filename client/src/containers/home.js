@@ -7,7 +7,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <UserSignInForm />
+        <UserSignInForm handleSubmit={this.props.handleSignInSubmit}/>
         <UserSignUpForm handleSubmit={this.props.handleSignUpSubmit} />
       </div>
     )
