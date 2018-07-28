@@ -5,11 +5,16 @@ import UserSignUpForm from '../src/components/userSignUpForm';
 
 Enzyme.configure({adapter: new Adapter()});
 
+const signUpForm = Enzyme.shallow(
+  <UserSignUpForm />
+);
+
 describe('Sign up form', () => {
   it('has a first name field',() => {
-    const signUpForm = Enzyme.shallow(
-      <UserSignUpForm />
-    );
     expect((signUpForm).find('#first-name').length).toEqual(1);
+  })
+
+  it('has a last name field',() => {
+    expect((signUpForm).find('#last-name').length).toEqual(1);
   })
 })
