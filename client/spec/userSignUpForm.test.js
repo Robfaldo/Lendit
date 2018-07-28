@@ -10,6 +10,10 @@ const signUpForm = Enzyme.shallow(
 );
 
 describe('Sign up form', () => {
+  it('has a sign up form', () => {
+    expect((signUpForm).find('#signup-form').length).toEqual(1);
+  })
+
   it('has a first name field',() => {
     expect((signUpForm).find('#signup-first-name').length).toEqual(1);
   })
@@ -33,4 +37,5 @@ describe('Sign up form', () => {
   it('has a password confirmation field', () => {
     expect(signUpForm.find('#signup-password-confirm').length).toEqual(1);
   })
+
 })
