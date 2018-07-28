@@ -47,7 +47,7 @@ class App extends React.Component {
       });
   };
 
-  _logout = () => {
+  _logout = (event) => {
     event.preventDefault();
     console.log('logging out');
     axios.post('/auth/logout').then(response => {
