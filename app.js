@@ -74,28 +74,8 @@ const User = mongoose.model('User');
 // this is all of the authentication path
 app.use('/auth', require('./auth'));
 
-app.get('/api/items', async (req, res) => {
-    const items = await Item.findAllAndReverse();
-    res.json(items)
-});
-
-
-app.post('/api/items', async (req, res, next) => {
-    const itemToCreate = { itemName: req.body.itemName };
-    const newItem = new Item(itemToCreate);
-    await newItem.save();
-    res.send({
-        success: true,
-        message: 'Listing created'
-    });
-    next();
-});
-
-app.delete('/api/items', async (req, res, next) => {
-    const itemIdToDelete = req.body._id;
-    await Item.findByIdAndRemove(itemIdToDelete);
-    next();
-});
+var itemsRouter = require('./routes/api/items');
+app.use('/api', itemsRouter);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
