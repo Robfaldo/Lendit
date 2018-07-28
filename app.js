@@ -17,6 +17,9 @@ app.use(bodyParser.json());
 //session
 const session = require('express-session');
 
+//passport
+const passport = require('./passport/index');
+
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}));
