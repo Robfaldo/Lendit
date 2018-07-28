@@ -13,4 +13,8 @@ describe('SignInForm', () => {
   it('has a username field', () => {
     expect((signInForm).find('#signin-username').length).toEqual(1);
   })
+
+  it('has a password field', () => {
+    expect((signInForm).find('#signin-password').length).toEqual(1);
+  })
 })
