@@ -29,4 +29,8 @@ describe('Sign up form', () => {
   it('has a password field', () => {
     expect(signUpForm.find('#signup-password').length).toEqual(1);
   })
+
+  it('has a password confirmation field', () => {
+    expect(signUpForm.find('#signup-password-confirm').length).toEqual(1);
+  })
 })
