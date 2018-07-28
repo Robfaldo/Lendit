@@ -5,8 +5,9 @@ import Profile from '../../src/containers/profile';
 
 Enzyme.configure({adapter: new Adapter()});
 const mockItemsData = {};
+const mockSubmit = {};
 const profile = Enzyme.shallow(
-  <Profile itemListData={mockItemsData} />
+  <Profile itemListData={mockItemsData} handleItemFormSubmit={mockSubmit} />
 );
 
 describe('Profile', () => {
@@ -21,9 +22,14 @@ describe('Profile', () => {
   })
 
   describe('handling passing on of props', () => {
-    it('data for itemList is passed on properly', () => {
+    it('data for itemList is passed on as prop', () => {
       expect(profile.find('ItemList').props().itemsData)
         .toBe(mockItemsData);
+    })
+
+    it('onSubmit for itemSubmitForm is passed on as prop', () => {
+      expect(profile.find('ItemSubmitForm').props().onSubmit)
+        .toBe(mockSubmit);
     })
   })
 })

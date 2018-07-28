@@ -8,7 +8,7 @@ class Profile extends React.Component {
     return(
       <div>
         <ItemList itemsData={this.props.itemListData}/>
-        <ItemSubmitForm />
+        <ItemSubmitForm onSubmit={this.props.handleItemFormSubmit}/>
       </div>
     )
   }
