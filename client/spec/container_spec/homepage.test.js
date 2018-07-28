@@ -4,9 +4,12 @@ import Adapter from 'enzyme-adapter-react-16';
 import Home from '../../src/containers/home';
 
 Enzyme.configure({adapter: new Adapter()});
+const home = Enzyme.shallow(
+  <Home />
+);
 
 describe('Home', () => {
-  it('exists', () => {
-    expect(3).toEqual(3);
+  it('has a sign in component', () => {
+    expect((home).find('UserSignInForm').length).toEqual(1);
   })
 })
