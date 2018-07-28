@@ -1,7 +1,7 @@
 import React from 'react';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import UserSignInForm from '../src/components/userSignInForm';
+import UserSignInForm from '../../src/components/userSignInForm';
 
 Enzyme.configure({adapter: new Adapter()});
 
