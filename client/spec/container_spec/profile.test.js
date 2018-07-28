@@ -4,8 +4,9 @@ import Adapter from 'enzyme-adapter-react-16';
 import Profile from '../../src/containers/profile';
 
 Enzyme.configure({adapter: new Adapter()});
+const mockItemsData = {};
 const profile = Enzyme.shallow(
-  <Profile />
+  <Profile itemListData={mockItemsData} />
 );
 
 describe('Profile', () => {
@@ -19,9 +20,10 @@ describe('Profile', () => {
     })
   })
 
-  describe('handling form submissions', () => {
-    it('nothing here yet', () => {
-      expect(42).toBe(42);
+  describe('handling passing on of props', () => {
+    it('data for itemList is passed on properly', () => {
+      expect(profile.find('ItemList').props().itemsData)
+        .toBe(mockItemsData);
     })
   })
 })

@@ -7,7 +7,7 @@ class Profile extends React.Component {
   render() {
     return(
       <div>
-        <ItemList />
+        <ItemList itemsData={this.props.itemListData}/>
         <ItemSubmitForm />
       </div>
     )
