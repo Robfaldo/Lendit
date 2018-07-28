@@ -7,11 +7,35 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: []
+      data: [],
+      loggedIn: false,
+      user: null,
     }
-
-
   }
+
+  componentDidMount() {
+    this.getItems();
+    this.getUser();
+  }
+
+  getUser = () => {
+    axios.get('/auth/user').then(response => {
+      console.log(response.data);
+      if (!!response.data.user) {
+        console.log('THERE IS A USER');
+        this.setState({
+          loggedIn: true,
+          user: response.data.user
+        })
+      } else {
+        console.log('THERE IS NOT A USER');
+        this.setState({
+          loggedIn: false,
+          user: null
+        })
+      }
+    })
+  };
 
   getItems = () => {
     axios.get('/api/items')
@@ -21,6 +45,38 @@ class App extends React.Component {
       .catch((err) => {
         console.log(`Couldn't fetch data. The following error occured: ${err}`);
       });
+  };
+
+  _logout = () => {
+    event.preventDefault();
+    console.log('logging out');
+    axios.post('/auth/logout').then(response => {
+      console.log(response.data);
+      if (response.status === 200) {
+        this.setState({
+          loggedIn: false,
+          user: null
+        })
+      }
+    })
+  };
+
+  _login = (username, password) => {
+    axios
+      .post('/auth/login', {
+        username,
+        password
+      })
+      .then(response => {
+        console.log(response);
+        if (response.status === 200) {
+          // update the state
+          this.setState({
+            loggedIn: true,
+            user: response.data.user
+          })
+        }
+      })
   };
 
   // postItem = (item) => {
@@ -46,9 +102,6 @@ class App extends React.Component {
     }).then(() => this.getItems());
   };
 
-  componentDidMount() {
-    this.getItems();
-  }
 
   render() {
     return (
