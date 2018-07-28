@@ -11,14 +11,14 @@ const signUpForm = Enzyme.shallow(
 
 describe('Sign up form', () => {
   it('has a first name field',() => {
-    expect((signUpForm).find('#first-name').length).toEqual(1);
+    expect((signUpForm).find('#signup-first-name').length).toEqual(1);
   })
 
   it('has a last name field',() => {
-    expect((signUpForm).find('#last-name').length).toEqual(1);
+    expect((signUpForm).find('#signup-last-name').length).toEqual(1);
   })
 
   it('has a last name field',() => {
-    expect((signUpForm).find('#username').length).toEqual(1);
+    expect((signUpForm).find('#signup-username').length).toEqual(1);
   })
 })
