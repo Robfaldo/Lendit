@@ -13,6 +13,10 @@ describe('Profile', () => {
     it('has an itemList component', () => {
       expect(profile.find('ItemList').length).toEqual(1);
     })
+
+    it('has an item submit form', () => {
+      expect(profile.find('ItemSubmitForm').length).toEqual(1);
+    })
   })
 
   describe('handling form submissions', () => {
