@@ -2,5 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from './app';
+import Home from './containers/home';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Home />, document.getElementById('root'));
