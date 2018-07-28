@@ -10,7 +10,7 @@ const signInForm = Enzyme.shallow(
 );
 
 describe('SignInForm', () => {
-  it('should exist', () => {
-    expect(42).toEqual(42);
+  it('has a username field', () => {
+    expect((signInForm).find('#signin-username').length).toEqual(1);
   })
 })
