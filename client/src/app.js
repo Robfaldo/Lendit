@@ -9,8 +9,13 @@ class App extends React.Component {
     this.state = {
       data: [],
       loggedIn: false,
-      user: null,
+      user: null
     }
+    this.getUser = this.getUser.bind(this);
+    this.getItems = this.getItems.bind(this);
+    this.postItem = this.postItem.bind(this);
+    this._login = this._login.bind(this);
+    this._logout = this._logout.bind(this);
   }
 
   componentDidMount() {
@@ -18,7 +23,7 @@ class App extends React.Component {
     this.getUser();
   }
 
-  getUser = () => {
+  getUser() {
     axios.get('/auth/user').then(response => {
       console.log(response.data);
       if (!!response.data.user) {
@@ -37,7 +42,7 @@ class App extends React.Component {
     })
   };
 
-  getItems = () => {
+  getItems() {
     axios.get('/api/items')
       .then(res => {
         this.setState({data: res.data});
@@ -47,7 +52,7 @@ class App extends React.Component {
       });
   };
 
-  _logout = (event) => {
+  _logout(event) {
     event.preventDefault();
     console.log('logging out');
     axios.post('/auth/logout').then(response => {
@@ -61,7 +66,7 @@ class App extends React.Component {
     })
   };
 
-  _login = (username, password) => {
+  _login(username, password) {
     axios
       .post('/auth/login', {
         username,
@@ -77,21 +82,11 @@ class App extends React.Component {
           })
         }
       })
-  };
+  }
 
-  // postItem = (item) => {
-  //     axios.post('/api/items', item)
-  //         .then(res => {
-  //             console.log('Your post has been made!')
-  //         })
-  //         .catch(err => {
-  //             console.log(`Couldn't post data. The following error occured: ${err}`)
-  //         })
-  //         .then(() => this.getItems());
-  // };
-
-  postItem = (item) =>{
-    console.log(item);
+  // change this to axios later
+  postItem(item) {
+    console.log(item);}}
     fetch('/api/items', {
       method: 'POST',
       headers: {
