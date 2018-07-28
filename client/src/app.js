@@ -10,7 +10,7 @@ class App extends React.Component {
       data: [],
       loggedIn: false,
       user: null
-    }
+    };
     this.getUser = this.getUser.bind(this);
     this.getItems = this.getItems.bind(this);
     this.postItem = this.postItem.bind(this);
@@ -86,7 +86,7 @@ class App extends React.Component {
 
   // change this to axios later
   postItem(item) {
-    console.log(item);}}
+    console.log(item);
     fetch('/api/items', {
       method: 'POST',
       headers: {
@@ -95,7 +95,7 @@ class App extends React.Component {
       },
       body: JSON.stringify(item)
     }).then(() => this.getItems());
-  };
+  }
 
 
   render() {
