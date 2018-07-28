@@ -60,4 +60,18 @@ describe('Server path /api/items', () => {
       assert.equal(itemInDatabase, itemToCreate.itemName);
     });
   });
+  describe('DELETE', () => {
+    it('removes the item from the database', async () => {
+      const item = new Item({ itemName: 'Scissors' });
+      await item.save();
+
+      const response = await request(app)
+        .delete('/api/items')
+        .send({_id: item._id});
+
+      const databaseResponse = await Item.find();
+
+      assert.equal(databaseResponse[0], undefined);
+    });
+  });
 });

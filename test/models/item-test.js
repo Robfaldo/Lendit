@@ -20,7 +20,7 @@ describe('Item', () => {
       }
 
       const item = new Item(exampleItem);
-      item.save();
+      await item.save();
       const databaseResponse = await Item.find();
 
       assert.equal(databaseResponse[0].itemName, exampleItem.itemName);
@@ -31,9 +31,9 @@ describe('Item', () => {
       const item1 = new Item({itemName: 'Ostrich Egg', dateAdded: '2018-07-25T16:49:16.515Z'});
       const item2 = new Item({itemName: 'Tennis ball', dateAdded: '2017-07-24T16:49:16.515Z'});
       const item3 = new Item({itemName: 'Pet food', dateAdded: '2016-07-23T16:49:16.515Z'});
-      item1.save();
-      item2.save();
-      item3.save();
+      await item1.save();
+      await item2.save();
+      await item3.save();
 
       const databaseResponse = await Item.findAllAndReverse();
 

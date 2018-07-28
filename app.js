@@ -59,6 +59,12 @@ app.post('/api/items', async (req, res, next) => {
     next();
 });
 
+app.delete('/api/items', async (req, res, next) => {
+    const itemIdToDelete = req.body._id;
+    await Item.findByIdAndRemove(itemIdToDelete);
+    next();
+});
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
