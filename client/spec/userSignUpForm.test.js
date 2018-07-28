@@ -18,11 +18,15 @@ describe('Sign up form', () => {
     expect((signUpForm).find('#signup-last-name').length).toEqual(1);
   })
 
-  it('has a last name field',() => {
+  it('has a username field',() => {
     expect((signUpForm).find('#signup-username').length).toEqual(1);
   })
 
   it('has an email field', () => {
     expect(signUpForm.find('#signup-email').length).toEqual(1);
+  })
+
+  it('has a password field', () => {
+    expect(signUpForm.find('#signup-password').length).toEqual(1);
   })
 })

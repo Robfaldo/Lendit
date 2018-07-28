@@ -8,7 +8,7 @@ class UserSignUpForm extends React.Component {
         <input id="signup-last-name" type="text" placeholder="Last Name"/>
         <input id="signup-username" type="text" placeholder="Username"/>
         <input id="signup-email" type="email" placeholder="Email" />
-
+        <input id="signup-password" type="password" placeholder="Password" />
       </div>
     )
   };
