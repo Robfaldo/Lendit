@@ -12,4 +12,8 @@ describe('Home', () => {
   it('has a sign in component', () => {
     expect((home).find('UserSignInForm').length).toEqual(1);
   })
+
+  it('has a sign up component', () => {
+    expect(home.find('UserSignUpForm').length).toEqual(1);
+  })
 })

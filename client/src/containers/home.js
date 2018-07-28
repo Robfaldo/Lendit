@@ -1,10 +1,16 @@
 import React from 'react';
 import UserSignInForm from '../../src/components/userSignInForm';
+import UserSignUpForm from '../../src/components/userSignUpForm';
 
 
 class Home extends React.Component {
   render() {
-    return <UserSignInForm />
+    return (
+      <div>
+        <UserSignInForm />
+        <UserSignUpForm />
+      </div>
+    )
   }
 }
 
