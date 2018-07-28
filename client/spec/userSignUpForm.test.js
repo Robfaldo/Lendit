@@ -17,4 +17,8 @@ describe('Sign up form', () => {
   it('has a last name field',() => {
     expect((signUpForm).find('#last-name').length).toEqual(1);
   })
+
+  it('has a last name field',() => {
+    expect((signUpForm).find('#username').length).toEqual(1);
+  })
 })
