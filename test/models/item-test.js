@@ -17,7 +17,7 @@ describe('Item', () => {
     it('it persists', async () => {
       const exampleItem = {
         itemName: 'Scissors'
-      }
+      };
 
       const item = new Item(exampleItem);
       await item.save();
@@ -26,7 +26,7 @@ describe('Item', () => {
       assert.equal(databaseResponse[0].itemName, exampleItem.itemName);
     });
   });
-  describe('When returning items', () => {
+  describe('When returning items', async () => {
     it('returns them in reverse-chronological order', async () => {
       const item1 = new Item({itemName: 'Ostrich Egg', dateAdded: '2018-07-25T16:49:16.515Z'});
       const item2 = new Item({itemName: 'Tennis ball', dateAdded: '2017-07-24T16:49:16.515Z'});

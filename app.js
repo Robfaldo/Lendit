@@ -1,12 +1,10 @@
 const express = require('express');
 const path = require('path');
+//session
+const session = require('express-session');
 const bodyParser = require('body-parser');
-
+const MongoStore = require('connect-mongo')(session);
 const app = express();
-
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(express.static(path.join(__dirname, 'client/build')));
 
 
 var mongoose = require('mongoose');
@@ -38,9 +36,43 @@ mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-require('./models/item')
+//morgan
+const morgan = require('morgan');
+app.use(morgan('dev'));
+app.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
+);
+app.use(bodyParser.json());
+app.use(
+  session({
+    secret: "this is a test secret",
+    store: new MongoStore({mongooseConnection: db}),
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+
+//passport
+const passport = require('./passport/index');
+app.use(passport.initialize());
+app.use(passport.session()); // this calls deserialize
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+
+require('./models/item');
 const Item = mongoose.model('Item');
 
+require('./models/user');
+const User = mongoose.model('User');
+
+// this is all of the authentication path
+app.use('/auth', require('./auth'));
 
 app.get('/api/items', async (req, res) => {
     const items = await Item.findAllAndReverse();
@@ -49,9 +81,9 @@ app.get('/api/items', async (req, res) => {
 
 
 app.post('/api/items', async (req, res, next) => {
-    const itemToCreate = { itemName: req.body.itemName }
-    const newItem = new Item(itemToCreate)
-    await newItem.save()
+    const itemToCreate = { itemName: req.body.itemName };
+    const newItem = new Item(itemToCreate);
+    await newItem.save();
     res.send({
         success: true,
         message: 'Listing created'
