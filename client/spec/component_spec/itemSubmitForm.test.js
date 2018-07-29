@@ -13,6 +13,10 @@ const itemSubmitForm = Enzyme.shallow(
 
 describe('ItemSubmitForm', () => {
   describe('html elements', () => {
+    it('renders an item name field', () => {
+      expect(itemSubmitForm.find('#item_name').length).toEqual(1);
+    });
+
     it('renders a text field', () => {
       expect(itemSubmitForm.find('textarea').length).toEqual(1);
     });
@@ -20,7 +24,7 @@ describe('ItemSubmitForm', () => {
     it('renders a button', () => {
       expect(itemSubmitForm.find('button').length).toEqual(1);
     });
-  });  
+  });
 
   describe('submit action', () => {
     it('button handles clicks properly', () => {

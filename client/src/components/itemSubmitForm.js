@@ -4,9 +4,19 @@ class ItemSubmitForm extends React.Component {
   render() {
     return (
       <form className="ItemSubmitForm" onSubmit={this.props.handleSubmit}>
-        <textarea
+        ItemName: <input
+          id="item_name"
+          name="itemName"
+          type="text"
+          placeholder="Item Name"
+          value={this.props.itemName}
+          onChange={this.handleChange}
+        /><br />
+        ItemDescription: <textarea
           className="ItemInput"
-          placeholder="Please type in the item name here"
+          name="itemDescription"
+          type="text"
+          placeholder="Please type in the item description here"
           onChange={this.props.handleChange}
           value={this.props.description}
         />
