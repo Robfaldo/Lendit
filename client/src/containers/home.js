@@ -4,10 +4,6 @@ import UserSignUpForm from '../../src/components/userSignUpForm';
 
 
 class Home extends React.Component {
-  constructor(props){
-    super(props);
-  }
-
 
   render() {
 

@@ -1,13 +1,14 @@
 import React from 'react';
 import axios from 'axios';
 import {
-  BrowserRouter,
+  // BrowserRouter,
   Route,
-  Switch
+  // Switch
 } from 'react-router-dom';
 
 import ListingsPage from './components/listingsPage';
 import Home from './containers/home';
+import NavBar from './components/navBar';
 
 class App extends React.Component {
   constructor(props) {
@@ -107,8 +108,10 @@ class App extends React.Component {
 
   render() {
     return (
-      <BrowserRouter>
-        <Switch>
+      <div>
+        {/*<BrowserRouter>*/}
+        {/*<Switch>*/}
+          <NavBar loggedIn={this.state.loggedIn} _logout={this._logout}/>
           <Route exact path="/" component={
             ()=> {
               if(this.state.loggedIn){
@@ -122,8 +125,9 @@ class App extends React.Component {
               }
             }
           } />
-        </Switch>
-      </BrowserRouter>
+        {/*</Switch>*/}
+      {/*</BrowserRouter>*/}
+      </div>
     )
   }
 }
