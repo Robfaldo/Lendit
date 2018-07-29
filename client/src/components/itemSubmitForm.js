@@ -8,7 +8,7 @@ class ItemSubmitForm extends React.Component {
           className="ItemInput"
           placeholder="Please type in the item name here"
           onChange={this.props.handleChange}
-          value={this.props.value}
+          value={this.props.description}
         />
         <button type = "submit" className="SubmitButton">
           List Item
