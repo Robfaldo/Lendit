@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for Lendit/passport/localStrategy.js</title>
+    <title>Code coverage report for Lendit/upload/index.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -16,18 +16,18 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../index.html">All files</a> / <a href="index.html">Lendit/passport</a> localStrategy.js
+      <a href="../../index.html">All files</a> / <a href="index.html">Lendit/upload</a> index.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">33.33% </span>
+        <span class="strong">41.67% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>4/12</span>
+        <span class='fraction'>5/12</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/6</span>
+        <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>0/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">33.33% </span>
+        <span class="strong">41.67% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>4/12</span>
+        <span class='fraction'>5/12</span>
       </div>
     </div>
     <p class="quiet">
@@ -61,61 +61,37 @@
 <a name='L13'></a><a href='#L13'>13</a>
 <a name='L14'></a><a href='#L14'>14</a>
 <a name='L15'></a><a href='#L15'>15</a>
-<a name='L16'></a><a href='#L16'>16</a>
-<a name='L17'></a><a href='#L17'>17</a>
-<a name='L18'></a><a href='#L18'>18</a>
-<a name='L19'></a><a href='#L19'>19</a>
-<a name='L20'></a><a href='#L20'>20</a>
-<a name='L21'></a><a href='#L21'>21</a>
-<a name='L22'></a><a href='#L22'>22</a>
-<a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L16'></a><a href='#L16'>16</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">const User = require('../models/user');
-const LocalStrategy = require('passport-local').Strategy;
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">const Busboy = require('busboy');
+const express = require('express');
+const imageRoute = express();
 &nbsp;
-const strategy = new LocalStrategy(
-  {
-    usernameField: 'username' // not necessary, DEFAULT
-  },
-<span class="fstat-no" title="function not covered" >  fu</span>nction(username, password, done) {
-<span class="cstat-no" title="statement not covered" >    User.findOne({ 'username': username }, <span class="fstat-no" title="function not covered" >(e</span>rr, userMatch) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      if (err) {</span>
-<span class="cstat-no" title="statement not covered" >        return done(err)</span>
-      }
-<span class="cstat-no" title="statement not covered" >      if (!userMatch) {</span>
-<span class="cstat-no" title="statement not covered" >        return done(null, false, { message: 'Incorrect username' })</span>
-      }
-<span class="cstat-no" title="statement not covered" >      if (!userMatch.checkPassword(password)) {</span>
-<span class="cstat-no" title="statement not covered" >        return done(null, false, { message: 'Incorrect password' })</span>
-      }
-<span class="cstat-no" title="statement not covered" >      return done(null, userMatch)</span>
-    })
-  }
-);
+imageRoute.post('/upload', <span class="fstat-no" title="function not covered" >fu</span>nction (req, res, next) {
+<span class="cstat-no" title="statement not covered" >    console.log("============ UPLOAD BEGIN ================");</span>
+    let busboy = <span class="cstat-no" title="statement not covered" >new Busboy({ headers: req.headers });</span>
+<span class="cstat-no" title="statement not covered" >    busboy.on('finish', <span class="fstat-no" title="function not covered" >fu</span>nction() {</span>
+<span class="cstat-no" title="statement not covered" >      console.log('Upload finished');</span>
+      const file = <span class="cstat-no" title="statement not covered" >req.files.image;</span>
+<span class="cstat-no" title="statement not covered" >      console.log(file);</span>
+    });
+<span class="cstat-no" title="statement not covered" >    req.pipe(busboy);</span>
+  });
 &nbsp;
-module.exports = strategy;</pre></td></tr>
+module.exports = imageRoute;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
