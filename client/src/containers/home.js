@@ -4,11 +4,17 @@ import UserSignUpForm from '../../src/components/userSignUpForm';
 
 
 class Home extends React.Component {
+  constructor(props){
+    super(props);
+  }
+
+
   render() {
+
     return (
       <div>
-        <UserSignInForm handleSubmit={this.props.handleSignInSubmit}/>
-        <UserSignUpForm handleSubmit={this.props.handleSignUpSubmit} />
+        <UserSignInForm handleSubmit={this.props.handleSubmit}/>
+        <UserSignUpForm />
       </div>
     )
   }

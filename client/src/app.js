@@ -1,7 +1,13 @@
 import React from 'react';
 import axios from 'axios';
+import {
+  BrowserRouter,
+  Route,
+  Switch
+} from 'react-router-dom';
 
 import ListingsPage from './components/listingsPage';
+import Home from './containers/home';
 
 class App extends React.Component {
   constructor(props) {
@@ -67,6 +73,7 @@ class App extends React.Component {
   };
 
   _login(username, password) {
+    console.log(`trying to log in with ${username}:${password}`);
     axios
       .post('/auth/login', {
         username,
@@ -100,13 +107,23 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <ListingsPage
-          data={this.state.data}
-          getRequest={this.getItems}
-          postRequest={this.postItem}
-        />
-      </div>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={
+            ()=> {
+              if(this.state.loggedIn){
+                return <ListingsPage
+                  data={this.state.data}
+                  getRequest={this.getItems}
+                  postRequest={this.postItem}
+                />
+              } else{
+                return <Home handleSubmit={this._login}/>
+              }
+            }
+          } />
+        </Switch>
+      </BrowserRouter>
     )
   }
 }
