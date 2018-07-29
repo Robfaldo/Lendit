@@ -4,6 +4,8 @@ const request = require('supertest');
 const mongoose = require('mongoose');
 const app = require('../../app');
 const Item = require('../../models/item');
+const User = require('../../models/user');
+
 
 describe('Server path /api/items', () => {
 
@@ -58,6 +60,31 @@ describe('Server path /api/items', () => {
       const itemInDatabase = databaseResponse[0].itemName
 
       assert.equal(itemInDatabase, itemToCreate.itemName);
+    });
+    it('assigns the item to a user', async () => {
+      const userToSignUp = {
+        "firstName": "Chris",
+        "lastName": "Terry",
+        "email": "chris@gmail.com",
+        "username": "chris555",
+        "password": "password"
+      };
+      const userResponse = await request(app)
+        .post('/auth/signup')
+        .type('form')
+        .send(userToSignUp);
+      const userLoginResponse = await request(app)
+        .post('/auth/login')
+        .send(userToSignUp);
+      const newUser = JSON.parse(userResponse.text);
+       const itemToCreate = {itemName: 'Peanut Butter', owner: newUser._id};
+      const itemResponse = await request(app)
+        .post('/api/items')
+        .type('form')
+        .send(itemToCreate);
+      const item = await Item.findOne( {itemName: 'Peanut Butter'} )
+        .populate('owner');
+       assert.equal(item.owner._id, newUser._id);
     });
   });
   describe('DELETE', () => {

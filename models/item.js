@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'), Schema = mongoose.Schema;
+const User = require('../models/user.js');
 
 const ItemSchema = new mongoose.Schema({
   itemName: {
@@ -7,6 +8,9 @@ const ItemSchema = new mongoose.Schema({
   dateAdded: {
     type: Date,
     default: Date.now
+  },
+  owner: {
+    type: Schema.Types.ObjectId, ref: 'User'
   }
 });
 
