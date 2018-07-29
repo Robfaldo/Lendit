@@ -17,7 +17,7 @@ describe('ItemSubmitForm', () => {
       expect(itemSubmitForm.find('#item_name').length).toEqual(1);
     });
 
-    it('renders a text field', () => {
+    it('renders a text description field', () => {
       expect(itemSubmitForm.find('textarea').length).toEqual(1);
     });
 
