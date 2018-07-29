@@ -11,20 +11,26 @@ const itemSubmitForm = Enzyme.shallow(
   <ItemSubmitForm handleSubmit={mockSubmit} handleChange={mockTextChange} />
 );
 
-test('renders a text field', () => {
-  expect(itemSubmitForm.find('textarea').length).toEqual(1);
-})
+describe('ItemSubmitForm', () => {
+  describe('html elements', () => {
+    it('renders a text field', () => {
+      expect(itemSubmitForm.find('textarea').length).toEqual(1);
+    });
 
-test('renders a button', () => {
-  expect(itemSubmitForm.find('button').length).toEqual(1);
-})
+    it('renders a button', () => {
+      expect(itemSubmitForm.find('button').length).toEqual(1);
+    });
+  });  
 
-test('button handles clicks properly', () => {
-  itemSubmitForm.find('form').simulate('submit');
-  expect(mockSubmit.mock.calls.length).toEqual(1);
-})
+  describe('submit action', () => {
+    it('button handles clicks properly', () => {
+      itemSubmitForm.find('form').simulate('submit');
+      expect(mockSubmit.mock.calls.length).toEqual(1);
+    });
 
-test('textarea handles change properly', () => {
-  itemSubmitForm.find('textarea').simulate('change');
-  expect(mockTextChange.mock.calls.length).toEqual(1);
-})
+    it('textarea handles change properly', () => {
+      itemSubmitForm.find('textarea').simulate('change');
+      expect(mockTextChange.mock.calls.length).toEqual(1);
+    });
+  });
+});
