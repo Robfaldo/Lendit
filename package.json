@@ -22,12 +22,13 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "mocha": "^5.2.0",
+    "nyc": "^12.0.2",
     "supertest": "^3.1.0"
   },
   "scripts": {
     "start": "node app.js",
     "heroku-postbuild": "export NODE_ENV='lendit-prod' && cd client && npm install && npm run build",
-    "test": "export DB_ENV='test' && mocha --recursive --exit && export DB_ENV=development"
+    "test": "export DB_ENV='test' && nyc --reporter=html --reporter=text mocha --recursive --exit && export DB_ENV=development"
   },
   "repository": {
     "type": "git",
