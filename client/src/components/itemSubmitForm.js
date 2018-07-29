@@ -20,7 +20,7 @@ class ItemSubmitForm extends React.Component {
           placeholder="Please type in the item description here"
           onChange={this.props.handleChange}
           value={this.props.description}
-        />
+        /> <br />
 
         Upload Image: <input
           type="file"
