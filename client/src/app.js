@@ -121,7 +121,7 @@ class App extends React.Component {
                   postRequest={this.postItem}
                 />
               } else{
-                return <Home handleSubmit={this._login}/>
+                return <Home handleSignInSubmit={this._login}/>
               }
             }
           } />
