@@ -12,6 +12,7 @@ class ItemSubmitForm extends React.Component {
           onChange={this.handleChange}
           value={this.props.itemName}
         /><br />
+
         ItemDescription: <textarea
           className="ItemInput"
           name="itemDescription"
@@ -20,6 +21,13 @@ class ItemSubmitForm extends React.Component {
           onChange={this.props.handleChange}
           value={this.props.description}
         />
+
+        Upload Image: <input
+          type="file"
+          name="image-upload"
+          id="image-upload"
+        />
+
         <button type = "submit" className="SubmitButton">
           List Item
         </button>

@@ -24,6 +24,10 @@ describe('ItemSubmitForm', () => {
     it('renders a button', () => {
       expect(itemSubmitForm.find('button').length).toEqual(1);
     });
+
+    it('renders an image upload component', () => {
+      expect(itemSubmitForm.find('#image-upload').length).toEqual(1);
+    });
   });
 
   describe('submit action', () => {
