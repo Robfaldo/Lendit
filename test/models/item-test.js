@@ -25,6 +25,18 @@ describe('Item', () => {
 
       assert.equal(databaseResponse[0].itemName, exampleItem.itemName);
     });
+    it('can have a description', async () => {
+      const exampleItem = {
+        itemName: 'Scissors',
+        itemDescription: 'This is the description of the item'
+      };
+
+      const item = new Item(exampleItem);
+      await item.save();
+      const databaseResponse = await Item.find();
+
+      assert.equal(databaseResponse[0].itemDescription, exampleItem.itemDescription);
+    });
   });
   describe('When returning items', async () => {
     it('returns them in reverse-chronological order', async () => {

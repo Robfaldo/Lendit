@@ -17,7 +17,7 @@ router.get('/items', async (req, res) => {
 });
 
 router.post('/items', async (req, res, next) => {
-    const itemToCreate = { itemName: req.body.itemName };
+    const itemToCreate = { itemName: req.body.itemName, itemDescription: req.body.itemDescription };
     const newItem = new Item(itemToCreate);
     await newItem.save();
     res.send({

@@ -7,6 +7,9 @@ const ItemSchema = new mongoose.Schema({
   dateAdded: {
     type: Date,
     default: Date.now
+  },
+  itemDescription: {
+    type: String
   }
 });
 
