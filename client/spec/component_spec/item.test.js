@@ -28,7 +28,7 @@ describe('Item', () => {
     });
 
     it('The <li> element contains the item image', () => {
-      expect(item.find('#itemImage').length).toEqual(1);
+      expect(item.find('.itemImage').length).toEqual(1);
     });
 
     describe('Borrow and buttons', () => {
