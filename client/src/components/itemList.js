@@ -6,9 +6,25 @@ class ItemList extends React.Component {
     super(props);
     this.state = {data: this.props.itemsData}
     this.renderItem = (itemData) => {
-      return <Item key={itemData._id} itemName={itemData.itemName} />
+      return (
+        <Item
+          key={itemData._id}
+          itemId={itemData._id}
+          itemName={itemData.itemName}
+          itemDescription={itemData.itemDescription}
+          itemImage={itemData.itemImage}
+          handleSubmit={this.handleSubmit}
+        />
+      )
     }
+    this.handleSubmit=this.handleSubmit.bind(this);
   }
+
+  handleSubmit(event) {
+    console.log(event.target.itemId.value);
+    event.preventDefault();
+  }
+
   componentWillReceiveProps(nextProps) {
     this.setState({ data: nextProps.itemsData });
   }
