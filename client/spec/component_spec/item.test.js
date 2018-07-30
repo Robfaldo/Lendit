@@ -25,5 +25,9 @@ describe('Item', () => {
     it('The <li> element contains the item description', () => {
       expect(item.find('#itemDescription').text()).toEqual('extremely rare');
     });
+
+    it('The <li> element contains the item image', () => {
+      expect(item.find('#itemImage').length).toEqual(1);
+    });
   });
 });
