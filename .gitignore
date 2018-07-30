@@ -2,4 +2,4 @@
 node_modules
 set_environment_variables.sh
 coverage
-.nyc_output
+.nyc_output/*
