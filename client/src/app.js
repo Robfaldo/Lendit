@@ -16,12 +16,14 @@ class App extends React.Component {
     this.state = {
       data: [],
       loggedIn: false,
-      user: null
+      user: null,
+      redirectTo: null
     };
     this.getUser = this.getUser.bind(this);
     this.getItems = this.getItems.bind(this);
     this.postItem = this.postItem.bind(this);
     this._login = this._login.bind(this);
+    this._signup = this._signup.bind(this);
     this._logout = this._logout.bind(this);
   }
 
@@ -96,6 +98,33 @@ class App extends React.Component {
       })
   }
 
+  _signup(event) {
+    event.preventDefault();
+    axios
+      .post('/auth/signup', {
+        username: event.target.username.value,
+        password: event.target.password.value,
+        firstName: event.target.firstName.value,
+        lastName: event.target.lastName.value,
+        email: event.target.email.value
+      })
+      .then(response => {
+        console.log(response);
+        if(!response.data.errmsg) {
+          console.log('Sign up successful');
+          console.log(response.data);
+          this.setState({
+            redirectTo: '/'
+          })
+        } else {
+          console.log('duplicate')
+        }
+      })
+      // .then(() => {
+      //   event.target.reset();SignIn
+      // })
+  }
+
   // change this to axios later
   postItem(item) {
     console.log(item);
@@ -126,7 +155,12 @@ class App extends React.Component {
                   user={this.state.user}
                 />
               } else{
-                return <Home handleSignInSubmit={this._login}/>
+                return (
+                  <Home
+                    handleSignInSubmit={this._login}
+                    handleSignUpSubmit={this._signup}
+                  />
+                )
               }
             }
           } />
