@@ -5,6 +5,7 @@ import Item from '../../src/components/item';
 
 Enzyme.configure({adapter: new Adapter()});
 
+const mockSubmit = jest.fn();
 const item = Enzyme.shallow(
   <Item
     itemName={'ostrich egg'}
@@ -28,6 +29,12 @@ describe('Item', () => {
 
     it('The <li> element contains the item image', () => {
       expect(item.find('#itemImage').length).toEqual(1);
+    });
+
+    describe('Borrow and buttons', () => {
+      it('renders a BORROW button', () => {
+        expect(item.find('#itemBorrow').length).toEqual(1);
+      });
     });
   });
 });
