@@ -1,3 +1,4 @@
+const AWS = require('aws-sdk');
 const Busboy = require('busboy');
 const express = require('express');
 const imageRoute = express();
