@@ -10,11 +10,12 @@ class ListingsPage extends React.Component {
     this.state = {submitFormText: '', itemDescription: '', data: this.props.data, selectedFile: null, randomNumber: Math.floor(Math.random(1000000) * Math.floor(Math.pow(10,10)))};
     this.handleSubmit = async (event) => {
       event.preventDefault();
+      let image = this.state.selectedFile ? this.state.randomNumber : "default";
       await this.props.postRequest(
         {
           itemName: this.state.submitFormText,
           itemDescription: this.state.itemDescription,
-          image: this.state.randomNumber,
+          image: image,
           owner: this.props.user["_id"],
         }
       );
