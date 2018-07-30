@@ -19,7 +19,11 @@ describe('Item', () => {
     })
 
     it('The <li> element contains the item name', () => {
-      expect(item.find('li').text()).toEqual('ostrich egg');
-    })
+      expect(item.find('#itemName').text()).toEqual('ostrich egg');
+    });
+
+    it('The <li> element contains the item description', () => {
+      expect(item.find('#itemDescription').text()).toEqual('extremely rare');
+    });
   });
 });
