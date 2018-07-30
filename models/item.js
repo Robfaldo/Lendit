@@ -9,6 +9,9 @@ const ItemSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
+  itemDescription: {
+    type: String
+  },
   owner: {
     type: Schema.Types.ObjectId, ref: 'User'
   }

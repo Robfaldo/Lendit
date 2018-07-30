@@ -61,6 +61,18 @@ describe('Server path /api/items', () => {
 
       assert.equal(itemInDatabase, itemToCreate.itemName);
     });
+    it('can create an item with a description', async () => {
+      const itemToCreate = { itemName: 'Scissors', itemDescription: 'This is the description of the item' };
+
+      const response = await request(app)
+        .post('/api/items')
+        .type('form')
+        .send(itemToCreate)
+
+      const databaseResponse = await Item.find();
+
+      assert.equal(databaseResponse[0].itemDescription, 'This is the description of the item');
+    });
     it('assigns the item to a user', async () => {
       const userToSignUp = {
         "firstName": "Chris",
