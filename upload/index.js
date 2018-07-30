@@ -43,6 +43,7 @@ imageRoute.post('/upload', async (req, res, next) => {
       console.log('============ FINISH UPLOAD TO AWS S3 ================');
     });
     req.pipe(busboy);
+    res.json({message: "image was uploaded successfully"});
   });
 
 module.exports = imageRoute;

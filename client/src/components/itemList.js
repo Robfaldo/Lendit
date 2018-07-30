@@ -4,7 +4,7 @@ import Item from './item';
 class ItemList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {data: this.props.itemsData}
+    this.state = {data: this.props.itemsData};
     this.renderItem = (itemData) => {
       return (
         <Item
@@ -12,7 +12,7 @@ class ItemList extends React.Component {
           itemId={itemData._id}
           itemName={itemData.itemName}
           itemDescription={itemData.itemDescription}
-          itemImage={itemData.itemImage}
+          image={itemData.image}
           handleSubmit={this.handleSubmit}
         />
       )
