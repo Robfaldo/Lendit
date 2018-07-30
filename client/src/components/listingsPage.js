@@ -8,7 +8,7 @@ class ListingsPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {submitFormText: '', itemDescription: '', data: this.props.data, selectedFile: null, randomNumber: Math.floor(Math.random(1000000) * Math.floor(Math.pow(10,10)))};
-    this.handleSubmit = async (event) => {
+    this.handleItemSubmission = async (event) => {
       event.preventDefault();
       let image = this.state.selectedFile ? this.state.randomNumber : "default";
       await this.props.postRequest(
@@ -56,7 +56,7 @@ class ListingsPage extends React.Component {
       <div>
         <ItemSubmitForm
           handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
+          handleSubmit={this.handleItemSubmission}
           handleFileChange={this.handleFileChange}
           value={this.state.submitFormText}
         />
