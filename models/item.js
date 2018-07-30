@@ -14,6 +14,10 @@ const ItemSchema = new mongoose.Schema({
   },
   owner: {
     type: Schema.Types.ObjectId, ref: 'User'
+  },
+  image: {
+    type: String,
+    default: "default.jpg",
   }
 });
 

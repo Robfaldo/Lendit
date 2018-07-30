@@ -4,9 +4,9 @@ import Item from './item';
 class ItemList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {data: this.props.itemsData}
+    this.state = {data: this.props.itemsData};
     this.renderItem = (itemData) => {
-      return <Item key={itemData._id} itemName={itemData.itemName} />
+      return <Item key={itemData._id} itemName={itemData.itemName} image={itemData.image}/>
     }
   }
   componentWillReceiveProps(nextProps) {
