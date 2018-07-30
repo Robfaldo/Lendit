@@ -8,7 +8,19 @@ class Item extends React.Component {
     }
   }
   render() {
-    return <li><img style={{height:100, width: 100}} src={this.state.imageUrl} alt={this.props.itemName}/>{this.props.itemName}</li>
+    return <li>
+            <div className="itemProps">
+              <p id="itemName">{this.props.itemName}</p>
+              <p id="itemDescription">{this.props.itemDescription}</p>
+              <img style={{height:100, width: 100}} src={this.state.imageUrl} alt={this.props.itemName}/>
+            </div>
+            <form className="itemButtons" onSubmit={this.props.handleSubmit}>
+              <input name="itemId" type="hidden" value={this.props.itemId} />
+              <button type="submit" className="itemBorrow" name="itemBorrow">
+                Borrow
+              </button>
+            </form>
+          </li>
   }
 }
 
