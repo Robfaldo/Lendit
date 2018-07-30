@@ -8,11 +8,12 @@ class Item extends React.Component {
               <p id="itemDescription">{this.props.itemDescription}</p>
               <img id="itemImage">{this.props.itemImage}</img>
             </div>
-            <div className="itemButtons" onClick="console.log('Borrowed!'); return false">
-              <button id="itemBorrow">
+            <form className="itemButtons" onSubmit={this.props.handleSubmit}>
+              <input name="itemId" type="hidden" value={this.props.itemId} />
+              <button type="submit" className="itemBorrow" name="itemBorrow">
                 Borrow
               </button>
-            </div>
+            </form>
           </li>
   }
 }

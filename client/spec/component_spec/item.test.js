@@ -33,7 +33,7 @@ describe('Item', () => {
 
     describe('Borrow and buttons', () => {
       it('renders a BORROW button', () => {
-        expect(item.find('#itemBorrow').length).toEqual(1);
+        expect(item.find('.itemButtons').length).toEqual(1);
       });
     });
   });
