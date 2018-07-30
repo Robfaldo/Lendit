@@ -73,7 +73,11 @@ class App extends React.Component {
     })
   };
 
-  _login(username, password) {
+  _login(event) {
+    let username = event.target.username.value;
+    let password = event.target.password.value;
+    event.target.reset();
+    event.preventDefault();
     console.log(`trying to log in with ${username}:${password}`);
     axios
       .post('/auth/login', {
