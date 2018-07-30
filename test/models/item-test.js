@@ -1,6 +1,8 @@
 const Item = require('../../models/item');
 const {assert} = require('chai');
 const mongoose = require('mongoose');
+const User = require('../../models/user');
+
 
 describe('Item', () => {
 
@@ -52,6 +54,26 @@ describe('Item', () => {
       assert.equal(databaseResponse[0].itemName, item1.itemName);
       assert.equal(databaseResponse[1].itemName, item2.itemName);
       assert.equal(databaseResponse[2].itemName, item3.itemName);
+    });
+  });
+  describe('#updateBorrower', () => {
+    it('changes the currentBorrower to the new borrower', async () => {
+      const item = new Item({ itemName: 'Toaster' });
+      await item.save();
+
+      const currentBorrower = new User({
+        'firstName': "Rob",
+        'lastName': "Faldo",
+        'email': "robertfaldo@gmail.com",
+        'username': "rfaldo",
+        'password': "validpassword123"
+      });
+
+      Item.updateBorrower(item._id, currentBorrower);
+
+      const updatedItem = await Item.findOne({ _id: item._id });
+
+      assert.deepEqual(currentBorrower._id, updatedItem.currentBorrower)
     });
   });
 });

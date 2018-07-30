@@ -37,4 +37,13 @@ router.delete('/items', async (req, res, next) => {
     next();
 });
 
+router.put('/items/:item_id', async (req, res, next) => {
+  const isUpdated = Item.updateBorrower(
+    req.params.item_id,
+    req.body.borrowerId
+  );
+  if (isUpdated) return res.sendStatus(200);
+  next();
+});
+
 module.exports = router;
