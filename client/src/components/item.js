@@ -10,7 +10,7 @@ function Item (props) {
           <p id="itemDescription">{props.itemDescription}</p>
           <img className="itemImage" style={{height:100, width: 100}} src={imageUrl} alt={props.itemName}/>
         </div>
-        <form className="itemButtons" onSubmit={props.handleSubmit}>
+        <form className="itemButtons" onSubmit={props.handleBorrowItem}>
           <input name="itemId" type="hidden" value={props.itemId} />
           <button type="submit" className="itemBorrow" name="itemBorrow">
             Borrow

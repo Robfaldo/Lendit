@@ -22,7 +22,7 @@ class ListingsPage extends React.Component {
       console.log(`User submitted: ${this.state.submitFormText}`);
       this.setState({submitFormText: ''});
       this.submitImage();
-    }
+    };
 
     this.submitImage = () =>{
       const formData = new FormData();
@@ -41,7 +41,11 @@ class ListingsPage extends React.Component {
       console.log(this.state.selectedFile);
     }
 
-  }
+    this.handleBorrowItem = (event) => {
+        console.log(event.target.itemId.value);
+        event.preventDefault();
+    };
+  };
 
   componentWillReceiveProps(nextProps) {
     this.setState({ data: nextProps.data });
@@ -56,7 +60,10 @@ class ListingsPage extends React.Component {
           handleFileChange={this.handleFileChange}
           value={this.state.submitFormText}
         />
-        <ItemList itemsData={this.props.data}/>
+        <ItemList
+          itemsData={this.props.data}
+          handleBorrowItem={this.props.handleBorrowItem}
+        />
       </div>
     )
   }
