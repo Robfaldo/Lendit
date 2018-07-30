@@ -5,12 +5,21 @@ import Item from '../../src/components/item';
 
 Enzyme.configure({adapter: new Adapter()});
 
-const item = Enzyme.shallow(<Item itemName={'ostrich egg'}/>)
+const item = Enzyme.shallow(
+  <Item
+    itemName={'ostrich egg'}
+    itemDescription={'extremely rare'}
+    itemImage={null}
+  />)
 
-test('Item renders a <li>', () => {
-  expect(item.find('li').length).toEqual(1);
-})
+describe('Item', () => {
+  describe('it renders html elements', () => {
+    it('Item renders a <li>', () => {
+      expect(item.find('li').length).toEqual(1);
+    })
 
-test('The <li> element contains the right text', () => {
-  expect(item.find('li').text()).toEqual('ostrich egg');
-})
+    it('The <li> element contains the item name', () => {
+      expect(item.find('li').text()).toEqual('ostrich egg');
+    })
+  });
+});
