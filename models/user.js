@@ -8,6 +8,7 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, required: false },
   username: { type: String, required: false },
   password: { type: String, required: false },
+  karmaPoints: { type: Number, default: 10 }
 });
 
 UserSchema.methods = {
