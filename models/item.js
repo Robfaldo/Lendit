@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'), Schema = mongoose.Schema;
+const User = require('../models/user.js');
 
 const ItemSchema = new mongoose.Schema({
   itemName: {
@@ -10,6 +11,9 @@ const ItemSchema = new mongoose.Schema({
   },
   itemDescription: {
     type: String
+  },
+  owner: {
+    type: Schema.Types.ObjectId, ref: 'User'
   }
 });
 
