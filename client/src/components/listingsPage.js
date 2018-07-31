@@ -8,7 +8,7 @@ class ListingsPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {submitFormText: '', itemDescription: '', data: this.props.data, selectedFile: null, randomNumber: Math.floor(Math.random(1000000) * Math.floor(Math.pow(10,10)))};
-    this.handleSubmit = async (event) => {
+    this.handleItemSubmission = async (event) => {
       event.preventDefault();
       let image = this.state.selectedFile ? this.state.randomNumber : "default";
       await this.props.postRequest(
@@ -22,7 +22,7 @@ class ListingsPage extends React.Component {
       console.log(`User submitted: ${this.state.submitFormText}`);
       this.setState({submitFormText: ''});
       this.submitImage();
-    }
+    };
 
     this.submitImage = () =>{
       const formData = new FormData();
@@ -41,7 +41,11 @@ class ListingsPage extends React.Component {
       console.log(this.state.selectedFile);
     }
 
-  }
+    this.handleBorrowItem = (event) => {
+        console.log(event.target.itemId.value);
+        event.preventDefault();
+    };
+  };
 
   componentWillReceiveProps(nextProps) {
     this.setState({ data: nextProps.data });
@@ -52,11 +56,14 @@ class ListingsPage extends React.Component {
       <div>
         <ItemSubmitForm
           handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
+          handleSubmit={this.handleItemSubmission}
           handleFileChange={this.handleFileChange}
           value={this.state.submitFormText}
         />
-        <ItemList itemsData={this.props.data}/>
+        <ItemList
+          itemsData={this.props.data}
+          handleBorrowItem={this.props.handleBorrowItem}
+        />
       </div>
     )
   }
