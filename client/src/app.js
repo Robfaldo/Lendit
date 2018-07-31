@@ -16,14 +16,12 @@ class App extends React.Component {
     this.state = {
       data: [],
       loggedIn: false,
-      user: null,
-      redirectTo: null
+      user: null
     };
     this.getUser = this.getUser.bind(this);
     this.getItems = this.getItems.bind(this);
     this.postItem = this.postItem.bind(this);
     this._login = this._login.bind(this);
-    this._signup = this._signup.bind(this);
     this._logout = this._logout.bind(this);
   }
 
@@ -75,11 +73,7 @@ class App extends React.Component {
     })
   };
 
-  _login(event) {
-    let username = event.target.username.value;
-    let password = event.target.password.value;
-    event.target.reset();
-    event.preventDefault();
+  _login(username, password) {
     console.log(`trying to log in with ${username}:${password}`);
     axios
       .post('/auth/login', {
@@ -96,33 +90,6 @@ class App extends React.Component {
           })
         }
       })
-  }
-
-  _signup(event) {
-    event.preventDefault();
-    axios
-      .post('/auth/signup', {
-        username: event.target.username.value,
-        password: event.target.password.value,
-        firstName: event.target.firstName.value,
-        lastName: event.target.lastName.value,
-        email: event.target.email.value
-      })
-      .then(response => {
-        console.log(response);
-        if(!response.data.errmsg) {
-          console.log('Sign up successful');
-          console.log(response.data);
-          this.setState({
-            redirectTo: '/'
-          })
-        } else {
-          console.log('duplicate')
-        }
-      })
-      // .then(() => {
-      //   event.target.reset();SignIn
-      // })
   }
 
   // change this to axios later
@@ -155,12 +122,7 @@ class App extends React.Component {
                   user={this.state.user}
                 />
               } else{
-                return (
-                  <Home
-                    handleSignInSubmit={this._login}
-                    handleSignUpSubmit={this._signup}
-                  />
-                )
+                return <Home handleSignInSubmit={this._login}/>
               }
             }
           } />
