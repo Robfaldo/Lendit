@@ -43,10 +43,13 @@ class ListingsPage extends React.Component {
 
     this.handleItemBorrow = async (event) => {
       event.preventDefault();
+      const borrower = this.props.user["_id"]
+      const itemId = event.target.itemId.value
+      console.log(itemId)
       console.log("borower id",this.props.user["_id"]);
       console.log("item id", event.target.itemId.value);
-      await axios.put(`/api/items/${event.target.itemId.value}`, { borrowerId : this.props.user["_id"]})
-      event.target.reset();
+      await axios.put(`/api/items/${itemId}`, { borrowerId : borrower})
+      // event.target.reset();
     }
 
   }
