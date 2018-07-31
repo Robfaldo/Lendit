@@ -39,6 +39,18 @@ describe('Item', () => {
 
       assert.equal(databaseResponse[0].itemDescription, exampleItem.itemDescription);
     });
+    it('starts with no current borrower ', async () => {
+      const exampleItem = {
+        itemName: 'Scissors',
+        itemDescription: 'This is the description of the item'
+      };
+
+      let item = new Item(exampleItem);
+      await item.save();
+      item = await Item.find({ itemName: 'Scissors' });
+      
+      assert.equal(item.currentBorrower, null);
+    });
   });
   describe('When returning items', async () => {
     it('returns them in reverse-chronological order', async () => {
