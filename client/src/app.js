@@ -111,7 +111,11 @@ class App extends React.Component {
       <div>
         {/*<BrowserRouter>*/}
         {/*<Switch>*/}
-          <NavBar loggedIn={this.state.loggedIn} _logout={this._logout}/>
+          <NavBar
+            loggedIn={this.state.loggedIn}
+            _logout={this._logout}
+            userDetails={this.state.user}
+          />
           <Route exact path="/" component={
             ()=> {
               if(this.state.loggedIn){
