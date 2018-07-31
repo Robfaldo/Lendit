@@ -13,17 +13,16 @@ class ItemList extends React.Component {
           itemName={itemData.itemName}
           itemDescription={itemData.itemDescription}
           image={itemData.image}
-          handleSubmit={this.handleSubmit}
+          handleSubmit={this.props.handleItemBorrow}
         />
       )
     }
-    this.handleSubmit=this.handleSubmit.bind(this);
   }
-
-  handleSubmit(event) {
-    console.log(event.target.itemId.value);
-    event.preventDefault();
-  }
+  // 
+  // handleSubmit(event) {
+  //   console.log(event.target.itemId.value);
+  //   event.preventDefault();
+  // }
 
   componentWillReceiveProps(nextProps) {
     this.setState({ data: nextProps.itemsData });

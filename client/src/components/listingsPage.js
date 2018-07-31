@@ -41,6 +41,14 @@ class ListingsPage extends React.Component {
       console.log(this.state.selectedFile);
     }
 
+    this.handleItemBorrow = async (event) => {
+      event.preventDefault();
+      console.log("borower id",this.props.user["_id"]);
+      console.log("item id", event.target.itemId.value);
+      await axios.put(`/api/items/${event.target.itemId.value}`, { borrowerId : this.props.user["_id"]})
+      event.target.reset();
+    }
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -56,7 +64,10 @@ class ListingsPage extends React.Component {
           handleFileChange={this.handleFileChange}
           value={this.state.submitFormText}
         />
-        <ItemList itemsData={this.props.data}/>
+        <ItemList
+          itemsData={this.props.data}
+          handleItemBorrow={this.handleItemBorrow}
+        />
       </div>
     )
   }
