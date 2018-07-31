@@ -4,11 +4,27 @@ import Item from './item';
 class ItemList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {data: this.props.itemsData}
+    this.state = {data: this.props.itemsData};
     this.renderItem = (itemData) => {
-      return <Item key={itemData._id} itemName={itemData.itemName} />
+      return (
+        <Item
+          key={itemData._id}
+          itemId={itemData._id}
+          itemName={itemData.itemName}
+          itemDescription={itemData.itemDescription}
+          image={itemData.image}
+          handleSubmit={this.handleSubmit}
+        />
+      )
     }
+    this.handleSubmit=this.handleSubmit.bind(this);
   }
+
+  handleSubmit(event) {
+    console.log(event.target.itemId.value);
+    event.preventDefault();
+  }
+
   componentWillReceiveProps(nextProps) {
     this.setState({ data: nextProps.itemsData });
   }

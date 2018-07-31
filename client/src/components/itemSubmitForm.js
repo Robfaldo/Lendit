@@ -6,10 +6,10 @@ class ItemSubmitForm extends React.Component {
       <form className="ItemSubmitForm" onSubmit={this.props.handleSubmit}>
         ItemName: <input
           id="item_name"
-          name="itemName"
+          name="submitFormText"
           type="text"
           placeholder="Item Name"
-          onChange={this.handleChange}
+          onChange={this.props.handleChange}
           value={this.props.itemName}
         /><br />
 
@@ -24,8 +24,10 @@ class ItemSubmitForm extends React.Component {
 
         Upload Image: <input
           type="file"
+          accept=".jpg"
           name="image-upload"
           id="image-upload"
+          onChange={this.props.handleFileChange}
         />
 
         <button type = "submit" className="SubmitButton">
