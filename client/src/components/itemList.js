@@ -18,11 +18,6 @@ class ItemList extends React.Component {
       )
     }
   }
-  // 
-  // handleSubmit(event) {
-  //   console.log(event.target.itemId.value);
-  //   event.preventDefault();
-  // }
 
   componentWillReceiveProps(nextProps) {
     this.setState({ data: nextProps.itemsData });
