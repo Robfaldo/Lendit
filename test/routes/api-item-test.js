@@ -89,7 +89,7 @@ describe('Server path /api/items', () => {
         .post('/auth/login')
         .send(userToSignUp);
       const newUser = JSON.parse(userResponse.text);
-       const itemToCreate = {itemName: 'Peanut Butter', owner: newUser._id};
+      const itemToCreate = {itemName: 'Peanut Butter', owner: newUser._id};
       const itemResponse = await request(app)
         .post('/api/items')
         .type('form')
@@ -111,6 +111,98 @@ describe('Server path /api/items', () => {
       const databaseResponse = await Item.find();
 
       assert.equal(databaseResponse[0], undefined);
+    });
+  });
+  describe('/:item_id', () => {
+    describe('PUT', () => {
+      it('updates the current borrower of the item', async () => {
+        const userToSignUp = {
+          "firstName": "Chris",
+          "lastName": "Terry",
+          "email": "chris@gmail.com",
+          "username": "chris555",
+          "password": "password"
+        };
+        const userRegistrationResponse = await request(app)
+          .post('/auth/signup')
+          .type('form')
+          .send(userToSignUp);
+        const userLoginResponse = await request(app)
+          .post('/auth/login')
+          .send(userToSignUp);
+        const newUser = JSON.parse(
+          userRegistrationResponse.text
+        );
+
+        // create user for owner
+
+        const user = new User({
+          'firstName': "Lender",
+          'lastName': "Herring",
+          'email': "dave@gmail.com",
+          'username': "Dave1",
+          'password': "validpassword123"
+        });
+        await user.save();
+
+        const newItem = new Item({
+          itemName: 'Kettle',
+          owner: user
+        });
+        await newItem.save();
+
+        const response = await request(app)
+          .put(`/api/items/${newItem._id}`)
+          .send({ borrowerId: newUser._id });
+
+        const updatedItem = await Item.findOne( {itemName: 'Kettle'} )
+          .populate('currentBorrower');
+
+        assert.equal(updatedItem.currentBorrower._id, newUser._id);
+        assert.equal(response.status, 200);
+      });
+      it('gives the owner of the item a karma point', async () => {
+        const user1 = new User({
+          'firstName': "Borrower",
+          'lastName': "Martin",
+          'email': "chris123@gmail.com",
+          'username': "Christopher1",
+          'password': "validpassword123"
+        });
+        const user2 = new User({
+          'firstName': "Lender",
+          'lastName': "Herring",
+          'email': "dave@gmail.com",
+          'username': "Dave1",
+          'password': "validpassword123"
+        });
+        await user1.save();
+        await user2.save();
+
+        const user1LoginResponse = await request(app)
+          .post('/auth/login')
+          .send(user1);
+
+        const ownerUser = await User.findOne({ email: user2.email })
+
+        const newItem = new Item({
+          itemName: 'Kettle',
+          owner: ownerUser
+        });
+        await newItem.save();
+
+        const response = await request(app)
+          .put(`/api/items/${newItem._id}`)
+          .send({ borrowerId: user1._id });
+
+        const updatedItem = await Item.findOne( {itemName: 'Kettle'} )
+          .populate('owner')
+
+        const itemOwner = await User.findOne({ _id: updatedItem.owner._id })
+
+        assert.equal(itemOwner.karmaPoints, 11);
+        assert.equal(response.status, 200);
+      });
     });
   });
 });
