@@ -6,6 +6,10 @@ class Item extends React.Component {
     this.state={
       imageUrl : "https://makerslendit.s3.amazonaws.com/" + this.props.image + ".jpg",
     }
+    this.handleReturn = (event) => {
+      alert('Returning an item! =)');
+      event.preventDefault();
+    }
   }
   render() {
     return <li>
@@ -23,6 +27,13 @@ class Item extends React.Component {
               <input name="itemId" type="hidden" value={this.props.itemId} />
               <button type="submit" className="itemBorrow" name="itemBorrow">
                 Borrow
+              </button>
+            </form>
+
+            <form className="itemButtons" onSubmit={this.handleReturn}>
+              <input name="itemId" type="hidden" value={this.props.itemId} />
+              <button type="submit" className="itemReturn" name="itemReturn">
+                Return
               </button>
             </form>
           </li>
