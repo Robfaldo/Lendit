@@ -4,7 +4,10 @@ const mongoose = require('mongoose');
 const databaseUrl = require('../../database')
 
 require('../../models/item');
+require('../../models/user');
+
 const Item = mongoose.model('Item');
+const User = mongoose.model('User');
 
 mongoose.connect(databaseUrl);
 mongoose.Promise = global.Promise;
@@ -38,6 +41,20 @@ router.delete('/items', async (req, res, next) => {
     const itemIdToDelete = req.body._id;
     await Item.findByIdAndRemove(itemIdToDelete);
     next();
+});
+
+router.put('/items/:item_id', async (req, res, next) => {
+  const borrowerId = req.body.borrowerId
+  const itemToUpdate = await Item.findOne({ _id: req.params.item_id });
+  const itemOwner = await User.findOne({ _id: itemToUpdate.owner });
+
+  const isUpdated = Item.updateBorrower(
+    itemToUpdate._id,
+    borrowerId
+  );
+  await User.updateKarmaPoints(itemOwner, 1)
+  if (isUpdated) return res.sendStatus(200);
+  next();
 });
 
 module.exports = router;
