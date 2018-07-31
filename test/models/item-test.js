@@ -48,7 +48,7 @@ describe('Item', () => {
       let item = new Item(exampleItem);
       await item.save();
       item = await Item.find({ itemName: 'Scissors' });
-      
+
       assert.equal(item.currentBorrower, null);
     });
   });

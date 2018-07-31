@@ -134,7 +134,21 @@ describe('Server path /api/items', () => {
           userRegistrationResponse.text
         );
 
-        const newItem = new Item({ itemName: 'Kettle' });
+        // create user for owner
+
+        const user = new User({
+          'firstName': "Lender",
+          'lastName': "Herring",
+          'email': "dave@gmail.com",
+          'username': "Dave1",
+          'password': "validpassword123"
+        });
+        await user.save();
+
+        const newItem = new Item({
+          itemName: 'Kettle',
+          owner: user
+        });
         await newItem.save();
 
         const response = await request(app)
@@ -145,6 +159,48 @@ describe('Server path /api/items', () => {
           .populate('currentBorrower');
 
         assert.equal(updatedItem.currentBorrower._id, newUser._id);
+        assert.equal(response.status, 200);
+      });
+      it('gives the owner of the item a karma point', async () => {
+        const user1 = new User({
+          'firstName': "Borrower",
+          'lastName': "Martin",
+          'email': "chris123@gmail.com",
+          'username': "Christopher1",
+          'password': "validpassword123"
+        });
+        const user2 = new User({
+          'firstName': "Lender",
+          'lastName': "Herring",
+          'email': "dave@gmail.com",
+          'username': "Dave1",
+          'password': "validpassword123"
+        });
+        await user1.save();
+        await user2.save();
+
+        const user1LoginResponse = await request(app)
+          .post('/auth/login')
+          .send(user1);
+
+        const ownerUser = await User.findOne({ email: user2.email })
+
+        const newItem = new Item({
+          itemName: 'Kettle',
+          owner: ownerUser
+        });
+        await newItem.save();
+
+        const response = await request(app)
+          .put(`/api/items/${newItem._id}`)
+          .send({ borrowerId: user1._id });
+
+        const updatedItem = await Item.findOne( {itemName: 'Kettle'} )
+          .populate('owner')
+
+        const itemOwner = await User.findOne({ _id: updatedItem.owner._id })
+
+        assert.equal(itemOwner.karmaPoints, 11);
         assert.equal(response.status, 200);
       });
     });

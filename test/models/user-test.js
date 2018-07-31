@@ -29,4 +29,23 @@ describe('User', () => {
       assert.equal(userToCreate.karmaPoints, 10)
     });
   });
+
+  describe('#updateKarmaPoints', () => {
+    it('updates the owners karma points', async () => {
+      const owner = new User({
+        'firstName': "Owner",
+        'lastName': "Faldo",
+        'email': "robertfaldo@gmail.com",
+        'username': "rfaldo",
+        'password': "validpassword123"
+      });
+      owner.save();
+
+      User.updateKarmaPoints(owner, 1);
+
+      const ownerAfter = await User.findOne({ _id: owner._id })
+
+      assert.equal(ownerAfter.karmaPoints, 11)
+    });
+  });
 });
