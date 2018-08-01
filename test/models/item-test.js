@@ -29,12 +29,6 @@ describe('Item', () => {
       await disconnectFromDatabase();
     });
     it('starts with no current borrower ', async () => {
-      const exampleItem = {
-        itemName: 'Scissors',
-        itemDescription: 'This is the description of the item'
-      };
-
-      const item = new Item(exampleItem);
       const defaultValue = Item.schema.paths.currentBorrower.defaultValue
 
       assert.equal(defaultValue, undefined);
