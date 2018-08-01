@@ -108,17 +108,12 @@ describe('Server path /api/items', () => {
       it('updates the current borrower of the item', async () => {
         const borrower = await createUser({ firstName: 'Borrower'});
         const owner = await createUser({ firstName: 'Owner'});
-
-        const userLoginResponse = await request(app)
-          .post('/auth/login')
-          .send(borrower);
-
+        const loggedInUser = await logUserIn(borrower);
         const newItem = await createItem('Kettle', owner)
 
         const borrowResponse = await request(app)
           .put(`/api/items/${newItem._id}`)
           .send({ borrowerId: borrower._id });
-
         const updatedItem = await Item.findOne( {itemName: 'Kettle'} )
 
         assert.deepEqual(updatedItem.currentBorrower, borrower._id);
@@ -128,15 +123,11 @@ describe('Server path /api/items', () => {
         const borrower = await createUser({ firstName: 'Borrower'})
         const owner = await createUser({ firstName: 'Owner'})
         const newItem = await createItem('Kettle', owner)
-
-        const borrowerLogsIn = await request(app)
-          .post('/auth/login')
-          .send(borrower);
+        const borrowerLogsIn = await logUserIn(borrower);
 
         const ownerPostsItemResponse = await request(app)
           .put(`/api/items/${newItem._id}`)
           .send({ borrowerId: borrower._id });
-
         const itemOwner = await User.findOne({ _id: newItem.owner._id })
 
         assert.equal(itemOwner.karmaPoints, 11);
