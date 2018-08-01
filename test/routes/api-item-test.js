@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const app = require('../../app');
 const Item = require('../../models/item');
 const User = require('../../models/user');
-const {createUser} = require('../helper');
+const {createUser, createItem} = require('../helper');
 
 
 describe('Server path /api/items', () => {
@@ -134,16 +134,11 @@ describe('Server path /api/items', () => {
       it('gives the owner of the item a karma point', async () => {
         const borrower = await createUser({ firstName: 'Borrower'})
         const owner = await createUser({ firstName: 'Owner'})
+        const newItem = await createItem('Kettle', owner)
 
         const borrowerLogsIn = await request(app)
           .post('/auth/login')
           .send(borrower);
-
-        const newItem = new Item({
-          itemName: 'Kettle',
-          owner: owner
-        });
-        await newItem.save();
 
         const ownerPostsItemResponse = await request(app)
           .put(`/api/items/${newItem._id}`)
@@ -156,13 +151,4 @@ describe('Server path /api/items', () => {
       });
     });
   });
-
-  const createItem = async (itemName, owner) => {
-    const newItem = new Item({
-      itemName: itemName,
-      owner: owner
-    });
-    await newItem.save();
-    return newItem
-  }
 });

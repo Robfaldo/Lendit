@@ -22,8 +22,18 @@ const createUser = async (userToCreate) => {
   return await user.save();
 }
 
+const createItem = async (itemName, owner) => {
+  const newItem = new Item({
+    itemName: itemName,
+    owner: owner
+  });
+  await newItem.save();
+  return newItem
+}
+
 module.exports = {
   connectToAndDropDatabase: connectToAndDropDatabase,
   disconnectFromDatabase: disconnectFromDatabase,
-  createUser: createUser
+  createUser: createUser,
+  createItem: createItem
 }
