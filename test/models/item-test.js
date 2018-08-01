@@ -5,22 +5,21 @@ const User = require('../../models/user');
 const sinon = require('sinon');
 const {
   connectToAndDropDatabase,
-  disconnectFromDatabase
+  disconnectFromDatabase,
+  createItem,
+  createItemWithDate
 } = require('../helper');
 
 describe('Item', () => {
   describe('#save', () => {
     it('it persists', async () => {
       await connectToAndDropDatabase();
-      const exampleItem = {
-        itemName: 'Scissors'
-      };
+      const itemToCreate = await createItem('Scissors');
 
-      const item = new Item(exampleItem);
-      await item.save();
-      const databaseResponse = await Item.find();
-
-      assert.equal(databaseResponse[0].itemName, exampleItem.itemName);
+      const newItem = await Item.findOne({ itemName: 'Scissors'});
+      
+      assert.equal(newItem.itemName, itemToCreate.itemName);
+      await disconnectFromDatabase();
     });
     it('can have a string description', async () => {
       const itemDescriptionPath = Item.schema.paths.itemDescription.instance
@@ -37,18 +36,15 @@ describe('Item', () => {
   describe('When returning items', async () => {
     it('returns them in reverse-chronological order', async () => {
       await connectToAndDropDatabase();
-      const item1 = new Item({itemName: 'Ostrich Egg', dateAdded: '2018-07-25T16:49:16.515Z'});
-      const item2 = new Item({itemName: 'Tennis ball', dateAdded: '2017-07-24T16:49:16.515Z'});
-      const item3 = new Item({itemName: 'Pet food', dateAdded: '2016-07-23T16:49:16.515Z'});
-      await item1.save();
-      await item2.save();
-      await item3.save();
+      const itemToCreate1 = await createItemWithDate('Scissors', '2018-07-25T16:49:16.515Z');
+      const itemToCreate2 = await createItemWithDate('Scissors', '2017-07-24T16:49:16.515Z');
+      const itemToCreate3 = await createItemWithDate('Scissors', '2016-07-23T16:49:16.515Z');
 
-      const databaseResponse = await Item.findAllAndReverse();
+      const itemsInDatabase = await Item.findAllAndReverse();
 
-      assert.equal(databaseResponse[0].itemName, item1.itemName);
-      assert.equal(databaseResponse[1].itemName, item2.itemName);
-      assert.equal(databaseResponse[2].itemName, item3.itemName);
+      assert.equal(itemsInDatabase[0].itemName, itemToCreate1.itemName);
+      assert.equal(itemsInDatabase[1].itemName, itemToCreate2.itemName);
+      assert.equal(itemsInDatabase[2].itemName, itemToCreate3.itemName);
       await disconnectFromDatabase();
     });
   });

@@ -24,26 +24,24 @@ describe('Server path /api/items', () => {
 
   describe('GET', () => {
     it('returns single item as JSON array', async () => {
-      const item = await createItem('Scissors');
+      const itemToCreate = await createItem('Scissors');
+
       const response = await request(app)
         .get('/api/items')
-
       const itemReceivedBack = JSON.parse(response.text)[0].itemName;
-      assert.equal(itemReceivedBack, item.itemName)
+
+      assert.equal(itemReceivedBack, itemToCreate.itemName)
     });
     it('returns multiple items as JSON array', async () => {
-      const item1 = new Item({itemName: 'Ostrich Egg', dateAdded: '2018-07-25T16:49:16.515Z'});
-      const item2 = new Item({itemName: 'Tennis ball', dateAdded: '2018-07-24T16:49:16.515Z'});
-      await item1.save();
-      await item2.save();
+      const itemToCreate1 = await createItem('Tennis Balls');
+      const itemToCreate2 = await createItem('Ostrich Egg');
 
       const response = await request(app)
         .get('/api/items')
+      const itemsReceivedBack = JSON.parse(response.text);
 
-      const responseJson = JSON.parse(response.text);
-
-      assert.equal(responseJson[0].itemName, item1.itemName)
-      assert.equal(responseJson[1].itemName, item2.itemName)
+      assert.equal(itemsReceivedBack[0].itemName, itemToCreate2.itemName)
+      assert.equal(itemsReceivedBack[1].itemName, itemToCreate1.itemName)
     });
   });
   describe('POST', () => {
@@ -54,11 +52,9 @@ describe('Server path /api/items', () => {
         .post('/api/items')
         .type('form')
         .send(itemToCreate)
+      const newItem = await Item.findOne(itemToCreate);
 
-      const databaseResponse = await Item.find();
-      const itemInDatabase = databaseResponse[0].itemName
-
-      assert.equal(itemInDatabase, itemToCreate.itemName);
+      assert.equal(newItem.itemName, itemToCreate.itemName);
     });
     it('can create an item with a description', async () => {
       const itemToCreate = { itemName: 'Scissors', itemDescription: 'This is the description of the item' };
@@ -67,10 +63,9 @@ describe('Server path /api/items', () => {
         .post('/api/items')
         .type('form')
         .send(itemToCreate)
+      const newItem = await Item.findOne({ itemName: 'Scissors' });
 
-      const databaseResponse = await Item.find();
-
-      assert.equal(databaseResponse[0].itemDescription, 'This is the description of the item');
+      assert.equal(newItem.itemDescription, 'This is the description of the item');
     });
     it('assigns the item to a user', async () => {
       const signedUpUser = await signUserUp({ "firstName": "Chris" });
@@ -89,16 +84,14 @@ describe('Server path /api/items', () => {
   });
   describe('DELETE', () => {
     it('removes the item from the database', async () => {
-      const item = new Item({ itemName: 'Scissors' });
-      await item.save();
+      const itemToCreate = await createItem('Scissors')
 
       const response = await request(app)
         .delete('/api/items')
-        .send({_id: item._id});
+        .send({_id: itemToCreate._id});
+      const newItem = await Item.findOne({ itemName: 'Sicssors' });
 
-      const databaseResponse = await Item.find();
-
-      assert.equal(databaseResponse[0], undefined);
+      assert.equal(newItem, undefined);
     });
   });
   describe('/:item_id', () => {

@@ -27,7 +27,7 @@ const createUser = async (userToCreate) => {
 const createItem = async (itemName, owner) => {
   const newItem = new Item({
     itemName: itemName,
-    owner: owner
+    owner: owner ? owner : undefined
   });
   await newItem.save()
   return newItem
@@ -48,11 +48,21 @@ const logUserIn = async (userToLogIn) => {
   return userLoginResponse
 };
 
+const createItemWithDate = async (itemName, date) => {
+  const newItem = new Item({
+    itemName: itemName,
+    dateAdded: date
+  });
+  await newItem.save()
+  return newItem
+}
+
 module.exports = {
   connectToAndDropDatabase: connectToAndDropDatabase,
   disconnectFromDatabase: disconnectFromDatabase,
   createUser: createUser,
   createItem: createItem,
   signUserUp: signUserUp,
-  logUserIn: logUserIn
+  logUserIn: logUserIn,
+  createItemWithDate: createItemWithDate
 }
