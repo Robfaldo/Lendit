@@ -1,6 +1,7 @@
 const User = require('../../models/user');
 const {assert} = require('chai');
 const mongoose = require('mongoose');
+const sinon = require('sinon');
 
 
 describe('User', () => {
@@ -24,20 +25,20 @@ describe('User', () => {
 
   describe('#updateKarmaPoints', () => {
     it('updates the owners karma points', async () => {
-      const owner = new User({
+      const spy = sinon.spy(User, 'findByIdAndUpdate');
+      const ownerMock = {
         'firstName': "Owner",
         'lastName': "Faldo",
         'email': "robertfaldo@gmail.com",
         'username': "rfaldo",
-        'password': "validpassword123"
-      });
-      owner.save();
+        'password': "validpassword123",
+        'karmaPoints': '10',
+        '_id': '1'
+      };
 
-      User.updateKarmaPoints(owner, 1);
+      User.updateKarmaPoints(ownerMock, 1);
 
-      const ownerAfter = await User.findOne({ _id: owner._id })
-
-      assert.equal(ownerAfter.karmaPoints, 11)
+      assert.equal(spy.withArgs(ownerMock._id, { karmaPoints: ownerMock.karmaPoints + 1 }).calledOnce, true)
     });
   });
 });
