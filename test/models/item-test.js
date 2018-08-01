@@ -27,17 +27,10 @@ describe('Item', () => {
 
       assert.equal(databaseResponse[0].itemName, exampleItem.itemName);
     });
-    it('can have a description', async () => {
-      const exampleItem = {
-        itemName: 'Scissors',
-        itemDescription: 'This is the description of the item'
-      };
+    it('can have a string description', async () => {
+      const itemDescriptionPath = Item.schema.paths.itemDescription.instance
 
-      const item = new Item(exampleItem);
-      await item.save();
-      const databaseResponse = await Item.find();
-
-      assert.equal(databaseResponse[0].itemDescription, exampleItem.itemDescription);
+      assert.equal(typeof itemDescriptionPath, 'string')
     });
     it('starts with no current borrower ', async () => {
       const exampleItem = {
