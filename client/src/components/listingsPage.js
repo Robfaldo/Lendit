@@ -3,6 +3,8 @@ import React from 'react';
 import ItemSubmitForm from './itemSubmitForm';
 import ItemList from './itemList';
 import axios from 'axios';
+import Map from './map';
+import '../mapStyle.css';
 
 class ListingsPage extends React.Component {
   constructor(props) {
@@ -61,6 +63,10 @@ class ListingsPage extends React.Component {
   render() {
     return(
       <div>
+        <Map data={[
+          {coordinates: ["51.5146485", "-0.0668833310722988"], text: "this is a test marker"},
+          {coordinates: ["51.5246485", "-0.0768833310722988"], text: "this is another test marker"},
+        ]}/>
         <ItemSubmitForm
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
