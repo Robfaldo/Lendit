@@ -6,7 +6,7 @@ import {
   // Switch
 } from 'react-router-dom';
 
-import ListingsPage from './components/listingsPage';
+import ListingsPage from './containers/listingsPage';
 import Home from './containers/home';
 import NavBar from './components/navBar';
 import Profile from './containers/profile';
