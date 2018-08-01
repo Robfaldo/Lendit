@@ -4,7 +4,6 @@ import ItemSubmitForm from './itemSubmitForm';
 import ItemList from './itemList';
 import axios from 'axios';
 import Map from './map';
-import '../mapStyle.css';
 
 class ListingsPage extends React.Component {
   constructor(props) {
