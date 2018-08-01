@@ -48,11 +48,21 @@ const logUserIn = async (userToLogIn) => {
   return userLoginResponse
 };
 
+const createItemWithDate = async (itemName, date) => {
+  const newItem = new Item({
+    itemName: itemName,
+    dateAdded: date
+  });
+  await newItem.save()
+  return newItem
+}
+
 module.exports = {
   connectToAndDropDatabase: connectToAndDropDatabase,
   disconnectFromDatabase: disconnectFromDatabase,
   createUser: createUser,
   createItem: createItem,
   signUserUp: signUserUp,
-  logUserIn: logUserIn
+  logUserIn: logUserIn,
+  createItemWithDate: createItemWithDate
 }

@@ -5,7 +5,8 @@ const User = require('../../models/user');
 const sinon = require('sinon');
 const {
   connectToAndDropDatabase,
-  disconnectFromDatabase
+  disconnectFromDatabase,
+  createItemWithDate
 } = require('../helper');
 
 describe('Item', () => {
@@ -37,18 +38,15 @@ describe('Item', () => {
   describe('When returning items', async () => {
     it('returns them in reverse-chronological order', async () => {
       await connectToAndDropDatabase();
-      const item1 = new Item({itemName: 'Ostrich Egg', dateAdded: '2018-07-25T16:49:16.515Z'});
-      const item2 = new Item({itemName: 'Tennis ball', dateAdded: '2017-07-24T16:49:16.515Z'});
-      const item3 = new Item({itemName: 'Pet food', dateAdded: '2016-07-23T16:49:16.515Z'});
-      await item1.save();
-      await item2.save();
-      await item3.save();
+      const itemToCreate1 = await createItemWithDate('Scissors', '2018-07-25T16:49:16.515Z');
+      const itemToCreate2 = await createItemWithDate('Scissors', '2017-07-24T16:49:16.515Z');
+      const itemToCreate3 = await createItemWithDate('Scissors', '2016-07-23T16:49:16.515Z');
 
-      const databaseResponse = await Item.findAllAndReverse();
+      const itemsInDatabase = await Item.findAllAndReverse();
 
-      assert.equal(databaseResponse[0].itemName, item1.itemName);
-      assert.equal(databaseResponse[1].itemName, item2.itemName);
-      assert.equal(databaseResponse[2].itemName, item3.itemName);
+      assert.equal(itemsInDatabase[0].itemName, itemToCreate1.itemName);
+      assert.equal(itemsInDatabase[1].itemName, itemToCreate2.itemName);
+      assert.equal(itemsInDatabase[2].itemName, itemToCreate3.itemName);
       await disconnectFromDatabase();
     });
   });
