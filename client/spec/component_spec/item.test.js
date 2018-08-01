@@ -19,22 +19,8 @@ describe('Item', () => {
       expect(item.find('li').length).toEqual(1);
     })
 
-    it('The <li> element contains the item name', () => {
-      expect(item.find('#itemName').text()).toEqual('ostrich egg');
-    });
-
-    it('The <li> element contains the item description', () => {
-      expect(item.find('#itemDescription').text()).toEqual('extremely rare');
-    });
-
-    it('The <li> element contains the item image', () => {
-      expect(item.find('.itemImage').length).toEqual(1);
-    });
-
-    describe('Borrow and buttons', () => {
-      it('renders a BORROW button', () => {
-        expect(item.find('.itemButtons').length).toEqual(1);
-      });
+    it('The <li> element contains a card', () => {
+      expect(item.find('.small').length).toEqual(1);
     });
   });
 });

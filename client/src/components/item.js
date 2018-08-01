@@ -1,4 +1,5 @@
 import React from 'react';
+import {Button, Card, CardTitle} from 'react-materialize'
 
 class Item extends React.Component {
   constructor(props){
@@ -9,22 +10,20 @@ class Item extends React.Component {
   }
   render() {
     return <li>
-            <div className="itemProps">
-              <p id="itemName">{this.props.itemName}</p>
-              <p id="itemDescription">{this.props.itemDescription}</p>
-              <img
-                className="itemImage"
-                style={{height:100, width: 100}}
-                src={this.state.imageUrl}
-                alt={this.props.itemName}
-              />
-            </div>
-            <form className="itemButtons" onSubmit={this.props.handleSubmit}>
-              <input name="itemId" type="hidden" value={this.props.itemId} />
-              <button type="submit" className="itemBorrow" name="itemBorrow">
-                Borrow
-              </button>
-            </form>
+            <Card
+              className='small'
+              header={<CardTitle style={{height:350, width:300}}
+              image={this.state.imageUrl}>{this.props.itemName}</CardTitle>}
+              actions={
+                [<form className="itemButtons" onSubmit={this.props.handleSubmit}>
+                <input name="itemId" type="hidden" value={this.props.itemId} />
+                <button type="submit" className="itemBorrow" name="itemBorrow">
+                  Borrow
+                </button>
+                </form>]
+              }>
+              {this.props.itemDescription}
+            </Card>
           </li>
   }
 }
