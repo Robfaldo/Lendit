@@ -6,10 +6,9 @@ const NavBar = props => {
     console.log(props.userDetails.karmaPoints);
     return(
       <div>
-        <Link to="#" onClick={props._logout}>Logout</Link>
-        <h1>Welcome, {props.userDetails.username}!</h1>
-        <p>You have {props.userDetails.karmaPoints} karma points</p>
-        <br />
+        <Link to="/profile"> Profile </Link>
+        <Link to="/"> Listings </Link>
+        <Link to="#" onClick={props._logout}> Logout </Link>
       </div>
     )
   } else {

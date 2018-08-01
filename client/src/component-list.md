@@ -6,9 +6,9 @@
     * [x] `<HomepageTitle />`
     * [x] `<HomepageDisplay />`
     * [x] `<HomepageDisplayToggle />`
-  * [ ] `<Profile />`
-    * [ ] `<Navbar />` (contains `PROFILE`, `listings`, `itemsubmitform`, `logout` links because logged-in)
-    * [ ] `<WelcomeMessage />`
+  * [x] `<Profile />`
+    * [x] `<Navbar />` (contains `PROFILE`, `listings`, `itemsubmitform`, `logout` links because logged-in)
+    * [x] `<WelcomeMessage />`
     * [ ] `<ProfilePicture />`
     * [ ] `<YourAvailableItems />`
       * [ ] `<ItemList />`
