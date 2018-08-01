@@ -16,17 +16,9 @@ describe('User', () => {
 
   describe('#save', () => {
     it('creates a user with 10 points', async () => {
-      const userToCreate = new User({
-        'firstName': "Chris",
-        'lastName': "Martin",
-        'email': "Chris123@gmail.com",
-        'username': "Christopher1",
-        'password': "validpassword123"
-      });
+      const defaultValue = User.schema.paths.karmaPoints.defaultValue
 
-      userToCreate.save();
-
-      assert.equal(userToCreate.karmaPoints, 10)
+      assert.equal(defaultValue, 10);
     });
   });
 
