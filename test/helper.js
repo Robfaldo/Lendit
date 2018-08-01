@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const User = require('../models/user');
 const Item = require('../models/item');
+const app = require('../app');
+const request = require('supertest');
 
 const connectToAndDropDatabase = async () => {
   await mongoose.connect(`mongodb://${process.env.DB_USERNAME}:${process.env.DB_Password}@ds247001.mlab.com:47101/lendit-test`);
@@ -31,9 +33,26 @@ const createItem = async (itemName, owner) => {
   return newItem
 }
 
+const signUserUp = async (userToSignUp) => {
+  const userResponse = await request(app)
+    .post('/auth/signup')
+    .type('form')
+    .send(userToSignUp);
+  return userResponse;
+};
+
+const logUserIn = async (userToLogIn) => {
+  const userLoginResponse = await request(app)
+    .post('/auth/login')
+    .send(userToLogIn);
+  return userLoginResponse
+};
+
 module.exports = {
   connectToAndDropDatabase: connectToAndDropDatabase,
   disconnectFromDatabase: disconnectFromDatabase,
   createUser: createUser,
-  createItem: createItem
+  createItem: createItem,
+  signUserUp: signUserUp,
+  logUserIn: logUserIn
 }

@@ -4,8 +4,12 @@ const mongoose = require('mongoose');
 const app = require('../../app');
 const Item = require('../../models/item');
 const User = require('../../models/user');
-const {createUser, createItem} = require('../helper');
-
+const {
+  createUser,
+  createItem,
+  logUserIn,
+  signUserUp
+} = require('../helper');
 
 describe('Server path /api/items', () => {
 
@@ -71,29 +75,18 @@ describe('Server path /api/items', () => {
       assert.equal(databaseResponse[0].itemDescription, 'This is the description of the item');
     });
     it('assigns the item to a user', async () => {
-      const userToSignUp = {
-        "firstName": "Chris",
-        "lastName": "Terry",
-        "email": "chris@gmail.com",
-        "username": "chris555",
-        "password": "password"
-      };
-      const userResponse = await request(app)
-        .post('/auth/signup')
-        .type('form')
-        .send(userToSignUp);
-      const userLoginResponse = await request(app)
-        .post('/auth/login')
-        .send(userToSignUp);
-      const newUser = JSON.parse(userResponse.text);
-      const itemToCreate = {itemName: 'Peanut Butter', owner: newUser._id};
-      const itemResponse = await request(app)
+      const signedUpUser = await signUserUp({ "firstName": "Chris" });
+      const loggedInUser = await logUserIn({ "firstName": "Chris" });
+      const loggedInUserId = JSON.parse(signedUpUser.text)._id;
+      const itemToCreate = {itemName: 'Peanut Butter', owner: loggedInUserId};
+
+      const createItemHttpResponse = await request(app)
         .post('/api/items')
         .type('form')
         .send(itemToCreate);
-      const item = await Item.findOne( {itemName: 'Peanut Butter'} )
-        .populate('owner');
-       assert.equal(item.owner._id, newUser._id);
+
+      const item = await Item.findOne({itemName: 'Peanut Butter'})
+      assert.equal(item.owner._id, loggedInUserId);
     });
   });
   describe('DELETE', () => {
