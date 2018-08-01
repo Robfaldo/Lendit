@@ -1,11 +1,11 @@
 import React from 'react';
-import L from 'leaflet';
 
 class ItemSubmitForm extends React.Component {
   // componentWillReceiveProps(nextProps){
   //   this.setState({map: this.props.map})
   //
   // }
+
 
   render() {
     return (

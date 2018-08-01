@@ -69,9 +69,6 @@ class ListingsPage extends React.Component {
       console.log(this.state);
     }
 
-    this.changeCurrentView = (arrayToChangeTo) => {
-      this.setState({currentView: arrayToChangeTo});
-    }
 
   }
 
