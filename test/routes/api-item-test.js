@@ -113,50 +113,23 @@ describe('Server path /api/items', () => {
   describe('/:item_id', () => {
     describe('PUT', () => {
       it('updates the current borrower of the item', async () => {
-        const userToSignUp = {
-          "firstName": "Chris",
-          "lastName": "Terry",
-          "email": "chris@gmail.com",
-          "username": "chris555",
-          "password": "password"
-        };
-        const userRegistrationResponse = await request(app)
-          .post('/auth/signup')
-          .type('form')
-          .send(userToSignUp);
+        const borrower = await createUser({ firstName: 'Borrower'});
+        const owner = await createUser({ firstName: 'Owner'});
+
         const userLoginResponse = await request(app)
           .post('/auth/login')
-          .send(userToSignUp);
-        const newUser = JSON.parse(
-          userRegistrationResponse.text
-        );
+          .send(borrower);
 
-        // create user for owner
+        const newItem = await createItem('Kettle', owner)
 
-        const user = new User({
-          'firstName': "Lender",
-          'lastName': "Herring",
-          'email': "dave@gmail.com",
-          'username': "Dave1",
-          'password': "validpassword123"
-        });
-        await user.save();
-
-        const newItem = new Item({
-          itemName: 'Kettle',
-          owner: user
-        });
-        await newItem.save();
-
-        const response = await request(app)
+        const borrowResponse = await request(app)
           .put(`/api/items/${newItem._id}`)
-          .send({ borrowerId: newUser._id });
+          .send({ borrowerId: borrower._id });
 
         const updatedItem = await Item.findOne( {itemName: 'Kettle'} )
-          .populate('currentBorrower');
 
-        assert.equal(updatedItem.currentBorrower._id, newUser._id);
-        assert.equal(response.status, 200);
+        assert.deepEqual(updatedItem.currentBorrower, borrower._id);
+        assert.equal(borrowResponse.status, 200);
       });
       it('gives the owner of the item a karma point', async () => {
         const borrower = await createUser({ firstName: 'Borrower'})
@@ -166,9 +139,6 @@ describe('Server path /api/items', () => {
           .post('/auth/login')
           .send(borrower);
 
-        // const newItem = createItem(
-        //   { itemName: 'Kettle', owner: owner}
-        // )
         const newItem = new Item({
           itemName: 'Kettle',
           owner: owner
@@ -186,4 +156,13 @@ describe('Server path /api/items', () => {
       });
     });
   });
+
+  const createItem = async (itemName, owner) => {
+    const newItem = new Item({
+      itemName: itemName,
+      owner: owner
+    });
+    await newItem.save();
+    return newItem
+  }
 });
