@@ -1,6 +1,5 @@
 import React from 'react';
 import {Button, Card, CardTitle} from 'react-materialize'
-import '../css/item.css';
 
 class Item extends React.Component {
   constructor(props){
