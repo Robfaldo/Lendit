@@ -10,7 +10,7 @@
     * [x] `<Navbar />` (contains `PROFILE`, `listings`, `itemsubmitform`, `logout` links because logged-in)
     * [x] `<WelcomeMessage />`
     * [ ] `<ProfilePicture />`
-    * [ ] `<YourAvailableItems />`
+    * [ ] `<MyAvailableItems />`
       * [ ] `<ItemList />`
         * [ ] `<Item />`
     * [ ] `<YourBorrowedItems />`

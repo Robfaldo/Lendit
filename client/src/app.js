@@ -138,10 +138,17 @@ class App extends React.Component {
           <Route exact path="/profile" component={
               () => {
                 if (this.state.loggedIn) {
-                  return <Profile userDetails={this.state.user} />
+                  return (
+                    <Profile
+                      userDetails={this.state.user}
+                      itemsData={this.props.data}
+                    />
+                  )
                 }
                 else {
-                  return <Home handleSignInSubmit={this._login}/>
+                  return (
+                    <Home handleSignInSubmit={this._login} />
+                  )
                 }
               }
             }
