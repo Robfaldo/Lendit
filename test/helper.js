@@ -27,7 +27,7 @@ const createUser = async (userToCreate) => {
 const createItem = async (itemName, owner) => {
   const newItem = new Item({
     itemName: itemName,
-    owner: owner
+    owner: owner ? owner : undefined
   });
   await newItem.save()
   return newItem

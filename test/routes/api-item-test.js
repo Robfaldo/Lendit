@@ -63,7 +63,6 @@ describe('Server path /api/items', () => {
         .post('/api/items')
         .type('form')
         .send(itemToCreate)
-
       const databaseResponse = await Item.find();
 
       assert.equal(databaseResponse[0].itemDescription, 'This is the description of the item');
@@ -85,16 +84,14 @@ describe('Server path /api/items', () => {
   });
   describe('DELETE', () => {
     it('removes the item from the database', async () => {
-      const item = new Item({ itemName: 'Scissors' });
-      await item.save();
+      const item = await createItem('Scissors')
 
       const response = await request(app)
         .delete('/api/items')
         .send({_id: item._id});
+      const newItem = await Item.findOne({ itemName: 'Sicssors' });
 
-      const databaseResponse = await Item.find();
-
-      assert.equal(databaseResponse[0], undefined);
+      assert.equal(newItem, undefined);
     });
   });
   describe('/:item_id', () => {
