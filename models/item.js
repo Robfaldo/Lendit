@@ -31,7 +31,7 @@ Item.findAllAndReverse = function() {
 }
 
 Item.updateBorrower = async function(itemId, currentBorrower) {
-  await Item.findOneAndUpdate(
+  await Item.findByIdAndUpdate(
     itemId,
     {currentBorrower: currentBorrower},
     {new: true},

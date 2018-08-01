@@ -2,7 +2,7 @@ const Item = require('../../models/item');
 const {assert} = require('chai');
 const mongoose = require('mongoose');
 const User = require('../../models/user');
-
+const sinon = require('sinon');
 
 describe('Item', () => {
 
@@ -70,22 +70,23 @@ describe('Item', () => {
   });
   describe('#updateBorrower', () => {
     it('changes the currentBorrower to the new borrower', async () => {
-      const item = new Item({ itemName: 'Toaster' });
-      await item.save();
-
-      const currentBorrower = new User({
+      const spy = sinon.spy(Item, 'findByIdAndUpdate')
+      const itemMock = {
+        itemName: 'Toaster',
+        id: '1'
+      }
+      const userMock = {
         'firstName': "Rob",
         'lastName': "Faldo",
         'email': "robertfaldo@gmail.com",
         'username': "rfaldo",
-        'password': "validpassword123"
-      });
+        'password': "validpassword123",
+        '_id': '001'
+      }
 
-      Item.updateBorrower(item._id, currentBorrower);
+      Item.updateBorrower(itemMock._id, userMock._id);
 
-      const updatedItem = await Item.findOne({ _id: item._id });
-
-      assert.deepEqual(currentBorrower._id, updatedItem.currentBorrower)
+      assert.equal(spy.calledOnce, true)
     });
   });
 });
