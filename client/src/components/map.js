@@ -8,11 +8,25 @@ class Map extends Component {
     this.state = {
       markers: [],
       places: [],
-      map: null,
+      map: this.props.map,
     };
   }
 
+  // shouldComponentUpdate() {
+  //   return false
+  // }
+
   access_token = process.env.MAP_KEY;
+
+  // componentWillReceiveProps(nextProps){
+  //   //Perform some operation
+  //   if(nextProps.map !== this.props.m) {
+  //     this.setState({
+  //       map: nextProps.map,
+  //     });
+  //     this.addthemap();
+  //   }
+  // }
 
   componentDidMount() {
     this.addthemap();
@@ -20,7 +34,6 @@ class Map extends Component {
   };
 
   addMarkers = () => {
-    let instance = this;
     let data = this.props.data;
     data.forEach(place =>{
       console.log("adding marker to map");
@@ -31,14 +44,16 @@ class Map extends Component {
   };
 
   addthemap = async () => {
-    await this.setState({map: L.map('map').setView([51.5146485,-0.0668833310722988],16)});
+    let map = await L.map('map').setView([51.5146485, -0.0668833310722988], 16);  //I'm so sorry
+    await this.setState({map: map});
+    await this.props.handleMapUpdate(map);
     await L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
       maxZoom: 18,
-      id: '',
+      id: 'mapbox.streets',
       accessToken: "pk.eyJ1Ijoia2hpZWJpZ2dzIiwiYSI6ImNqazdjNGk0ZzEyZngzcGszcnU3bGFlcjEifQ.Dpxxa0nVOMimeYlSTciMSg",
     }).addTo(this.state.map);
-    await L.tileLayer('https://api.mapbox.com/styles/v1/khiebiggs/cjk8adcp519r12rlhw7knuxmf/tiles/256/{z}/{x}/{y}?access_token={token}',{token: "pk.eyJ1Ijoia2hpZWJpZ2dzIiwiYSI6ImNqazdjNGk0ZzEyZngzcGszcnU3bGFlcjEifQ.Dpxxa0nVOMimeYlSTciMSg"}).addTo(this.state.map);
+    // await L.tileLayer('https://api.mapbox.com/styles/v1/khiebiggs/cjk8adcp519r12rlhw7knuxmf/tiles/256/{z}/{x}/{y}?access_token={token}', {token: "pk.eyJ1Ijoia2hpZWJpZ2dzIiwiYSI6ImNqazdjNGk0ZzEyZngzcGszcnU3bGFlcjEifQ.Dpxxa0nVOMimeYlSTciMSg"}).addTo(this.state.map);
     console.log("ADD THE MAP CALLED");
     this.addMarkers();
   };

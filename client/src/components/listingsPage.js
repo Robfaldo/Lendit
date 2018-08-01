@@ -9,7 +9,15 @@ import '../mapStyle.css';
 class ListingsPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {submitFormText: '', itemDescription: '', data: this.props.data, selectedFile: null, randomNumber: Math.floor(Math.random(1000000) * Math.floor(Math.pow(10,10)))};
+    this.state = {
+      map: null,
+      submitFormText: '',
+      itemDescription: '',
+      data: this.props.data,
+      selectedFile: null,
+      randomNumber: Math.floor(Math.random(1000000) * Math.floor(Math.pow(10,10))),
+      currentView: [51.5146485, -0.0668833310722988],
+    };
     this.handleSubmit = async (event) => {
       event.preventDefault();
       let image = this.state.selectedFile ? this.state.randomNumber : "default";
@@ -24,7 +32,7 @@ class ListingsPage extends React.Component {
       console.log(`User submitted: ${this.state.submitFormText}`);
       this.setState({submitFormText: ''});
       this.submitImage();
-    }
+    };
 
     this.submitImage = () =>{
       const formData = new FormData();
@@ -41,7 +49,7 @@ class ListingsPage extends React.Component {
       // file.name = this.props.user._id;
       await this.setState({selectedFile: event.target.files[0]});
       console.log(this.state.selectedFile);
-    }
+    };
 
     this.handleItemBorrow = async (event) => {
       event.preventDefault();
@@ -52,6 +60,17 @@ class ListingsPage extends React.Component {
       console.log("item id", event.target.itemId.value);
       await axios.put(`/api/items/${itemId}`, { borrowerId : borrower})
       // event.target.reset();
+    }
+
+    this.handleMapUpdate = (map) => {
+      console.log("MAP UPDATE CALLED");
+      console.log(map);
+      this.setState({map: map});
+      console.log(this.state);
+    }
+
+    this.changeCurrentView = (arrayToChangeTo) => {
+      this.setState({currentView: arrayToChangeTo});
     }
 
   }
@@ -65,13 +84,18 @@ class ListingsPage extends React.Component {
       <div>
         <Map data={[
           {coordinates: ["51.5146485", "-0.0668833310722988"], text: "this is a test marker"},
-          {coordinates: ["51.5246485", "-0.0768833310722988"], text: "this is another test marker"},
-        ]}/>
+        ]}
+             handleMapUpdate={this.handleMapUpdate}
+             currentView={this.state.currentView}
+             map={this.state.map}
+        />
         <ItemSubmitForm
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           handleFileChange={this.handleFileChange}
           value={this.state.submitFormText}
+          changeCurrentView={this.changeCurrentView}
+          map={this.state.map}
         />
         <ItemList
           itemsData={this.props.data}

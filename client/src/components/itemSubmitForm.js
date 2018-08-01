@@ -1,6 +1,12 @@
 import React from 'react';
+import L from 'leaflet';
 
 class ItemSubmitForm extends React.Component {
+  // componentWillReceiveProps(nextProps){
+  //   this.setState({map: this.props.map})
+  //
+  // }
+
   render() {
     return (
       <form className="ItemSubmitForm" onSubmit={this.props.handleSubmit}>
@@ -33,6 +39,7 @@ class ItemSubmitForm extends React.Component {
         <button type = "submit" className="SubmitButton">
           List Item
         </button>
+
       </form>
     )
   }
