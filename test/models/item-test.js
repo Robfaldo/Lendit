@@ -45,11 +45,10 @@ describe('Item', () => {
         itemDescription: 'This is the description of the item'
       };
 
-      let item = new Item(exampleItem);
-      await item.save();
-      item = await Item.find({ itemName: 'Scissors' });
+      const item = new Item(exampleItem);
+      const defaultValue = Item.schema.paths.currentBorrower.defaultValue
 
-      assert.equal(item.currentBorrower, null);
+      assert.equal(defaultValue, undefined);
     });
   });
   describe('When returning items', async () => {

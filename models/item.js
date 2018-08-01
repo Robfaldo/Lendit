@@ -16,7 +16,9 @@ const ItemSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId, ref: 'User'
   },
   currentBorrower: {
-    type: Schema.Types.ObjectId, ref: 'User'
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    default: undefined
   },
   image: {
     type: String,
