@@ -1,9 +1,9 @@
 import React from 'react';
 
-import ItemSubmitForm from './itemSubmitForm';
-import ItemList from './itemList';
+import ItemSubmitForm from '../components/itemSubmitForm';
+import ItemList from '../components/itemList';
 import axios from 'axios';
-import Map from './map';
+import Map from '../components/map';
 
 class ListingsPage extends React.Component {
   constructor(props) {
