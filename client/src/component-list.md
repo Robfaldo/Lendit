@@ -1,13 +1,13 @@
 # Component List Based on Mockup
 
 * [ ] `<App />`
-  * [ ] `<Home />`
-    * [ ] `<Navbar />` (contains only `about`-link because not logged-in)
-    * [ ] `<HomepageTitle />`
-    * [ ] `<HomepageDisplay />`
-    * [ ] `<SignInSignUpToggle />`
+  * [x] `<Home />`
+    * [x] `<Navbar />` (empty)
+    * [x] `<HomepageTitle />`
+    * [x] `<HomepageDisplay />`
+    * [x] `<HomepageDisplayToggle />`
   * [ ] `<Profile />`
-    * [ ] `<Navbar />` (contains `PROFILE`, `listings`, `itemsubmitform`, `logout`links because logged-in)
+    * [ ] `<Navbar />` (contains `PROFILE`, `listings`, `itemsubmitform`, `logout` links because logged-in)
     * [ ] `<WelcomeMessage />`
     * [ ] `<ProfilePicture />`
     * [ ] `<YourAvailableItems />`
