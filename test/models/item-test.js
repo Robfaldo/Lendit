@@ -6,6 +6,7 @@ const sinon = require('sinon');
 const {
   connectToAndDropDatabase,
   disconnectFromDatabase,
+  createItem,
   createItemWithDate
 } = require('../helper');
 
@@ -13,15 +14,12 @@ describe('Item', () => {
   describe('#save', () => {
     it('it persists', async () => {
       await connectToAndDropDatabase();
-      const exampleItem = {
-        itemName: 'Scissors'
-      };
+      const itemToCreate = await createItem('Scissors');
 
-      const item = new Item(exampleItem);
-      await item.save();
-      const databaseResponse = await Item.find();
-
-      assert.equal(databaseResponse[0].itemName, exampleItem.itemName);
+      const newItem = await Item.findOne({ itemName: 'Scissors'});
+      
+      assert.equal(newItem.itemName, itemToCreate.itemName);
+      await disconnectFromDatabase();
     });
     it('can have a string description', async () => {
       const itemDescriptionPath = Item.schema.paths.itemDescription.instance
