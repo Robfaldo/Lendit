@@ -16,7 +16,9 @@ const ItemSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId, ref: 'User'
   },
   currentBorrower: {
-    type: Schema.Types.ObjectId, ref: 'User'
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    default: undefined
   },
   image: {
     type: String,
@@ -31,7 +33,7 @@ Item.findAllAndReverse = function() {
 }
 
 Item.updateBorrower = async function(itemId, currentBorrower) {
-  await Item.findOneAndUpdate(
+  await Item.findByIdAndUpdate(
     itemId,
     {currentBorrower: currentBorrower},
     {new: true},
