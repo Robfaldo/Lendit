@@ -54,23 +54,23 @@ describe('Item', () => {
   });
   describe('#updateBorrower', () => {
     it('changes the currentBorrower to the new borrower', async () => {
-      const spy = sinon.spy(Item, 'findByIdAndUpdate')
+      const spy = sinon.spy(Item, 'findByIdAndUpdate');
       const itemMock = {
         itemName: 'Toaster',
         id: '1'
-      }
+      };
       const userMock = {
         'firstName': "Rob",
-        'lastName': "Faldo",
-        'email': "robertfaldo@gmail.com",
-        'username': "rfaldo",
-        'password': "validpassword123",
         '_id': '001'
-      }
+      };
 
-      Item.updateBorrower(itemMock._id, userMock._id);
+      Item.updateBorrower(itemMock._id, userMock);
+      const spyWithCorrectArgs = spy.withArgs(
+        itemMock._id,
+        { currentBorrower: userMock }
+      );
 
-      assert.equal(spy.calledOnce, true)
+      assert.equal(spyWithCorrectArgs.calledOnce, true);
     });
   });
 });
