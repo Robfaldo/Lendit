@@ -52,11 +52,9 @@ describe('Server path /api/items', () => {
         .post('/api/items')
         .type('form')
         .send(itemToCreate)
+      const newItem = await Item.findOne(itemToCreate);
 
-      const databaseResponse = await Item.find();
-      const itemInDatabase = databaseResponse[0].itemName
-
-      assert.equal(itemInDatabase, itemToCreate.itemName);
+      assert.equal(newItem.itemName, itemToCreate.itemName);
     });
     it('can create an item with a description', async () => {
       const itemToCreate = { itemName: 'Scissors', itemDescription: 'This is the description of the item' };
