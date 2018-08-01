@@ -24,14 +24,12 @@ describe('Server path /api/items', () => {
 
   describe('GET', () => {
     it('returns single item as JSON array', async () => {
-      const item = new Item({itemName: 'Scissors'});
-      await item.save();
-
+      const item = await createItem('Scissors');
       const response = await request(app)
         .get('/api/items')
 
-      const responseFirstItemName = JSON.parse(response.text)[0].itemName;
-      assert.equal(responseFirstItemName, item.itemName)
+      const itemReceivedBack = JSON.parse(response.text)[0].itemName;
+      assert.equal(itemReceivedBack, item.itemName)
     });
     it('returns multiple items as JSON array', async () => {
       const item1 = new Item({itemName: 'Ostrich Egg', dateAdded: '2018-07-25T16:49:16.515Z'});

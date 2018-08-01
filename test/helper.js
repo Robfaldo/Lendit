@@ -29,7 +29,7 @@ const createItem = async (itemName, owner) => {
     itemName: itemName,
     owner: owner
   });
-  await newItem.save();
+  await newItem.save()
   return newItem
 }
 
