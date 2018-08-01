@@ -16,7 +16,6 @@ class Map extends Component {
   //   return false
   // }
 
-  access_token = process.env.MAP_KEY;
 
   // componentWillReceiveProps(nextProps){
   //   //Perform some operation
