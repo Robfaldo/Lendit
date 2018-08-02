@@ -28,13 +28,11 @@ router.post('/items', async (req, res, next) => {
     };
     const newItem = new Item(itemToCreate);
     await newItem.save();
-    console.log(newItem["_id"]);
     res.send({
         success: true,
         message: 'Listing created',
         id: newItem["_id"]
     });
-    next();
 });
 
 router.delete('/items', async (req, res, next) => {

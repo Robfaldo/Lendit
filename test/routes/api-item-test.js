@@ -52,6 +52,7 @@ describe('Server path /api/items', () => {
         .post('/api/items')
         .type('form')
         .send(itemToCreate)
+
       const newItem = await Item.findOne(itemToCreate);
 
       assert.equal(newItem.itemName, itemToCreate.itemName);
