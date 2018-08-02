@@ -15,7 +15,7 @@ describe('User', () => {
 
   describe('#updateKarmaPoints', () => {
     it('updates the owners karma points', async () => {
-      const spy = sinon.spy(User, 'findByIdAndUpdate');
+      const stub = sinon.stub(User, 'findByIdAndUpdate');
       const ownerMock = {
         'firstName': "Owner",
         'lastName': "Faldo",
@@ -28,7 +28,8 @@ describe('User', () => {
 
       User.updateKarmaPoints(ownerMock, 1);
 
-      assert.equal(spy.withArgs(ownerMock._id, { karmaPoints: ownerMock.karmaPoints + 1 }).calledOnce, true)
+      assert.equal(stub.withArgs(ownerMock._id, { karmaPoints: ownerMock.karmaPoints + 1 }).calledOnce, true)
+      stub.restore();
     });
   });
 });
