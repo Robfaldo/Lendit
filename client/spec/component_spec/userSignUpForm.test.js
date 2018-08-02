@@ -17,11 +17,11 @@ describe('Sign up form', () => {
     })
 
     it('has a first name field',() => {
-      expect((signUpForm).find('#signup-first-name').length).toEqual(1);
+      expect((signUpForm).find('#first_name').length).toEqual(1);
     })
 
     it('has a last name field',() => {
-      expect((signUpForm).find('#signup-last-name').length).toEqual(1);
+      expect((signUpForm).find('#last_name').length).toEqual(1);
     })
 
     it('has a username field',() => {
@@ -29,11 +29,11 @@ describe('Sign up form', () => {
     })
 
     it('has an email field', () => {
-      expect(signUpForm.find('#signup-email').length).toEqual(1);
+      expect(signUpForm.find('#email').length).toEqual(1);
     })
 
     it('has a password field', () => {
-      expect(signUpForm.find('#signup-password').length).toEqual(1);
+      expect(signUpForm.find('#password').length).toEqual(1);
     })
   })
 
