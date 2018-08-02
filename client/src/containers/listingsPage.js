@@ -10,7 +10,6 @@ class ListingsPage extends React.Component {
     super(props);
     this.state = {
       map: null,
-      submitFormText: '',
       itemDescription: '',
       data: this.props.data,
       selectedFile: null,
@@ -119,8 +118,6 @@ class ListingsPage extends React.Component {
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           handleFileChange={this.handleFileChange}
-          value={this.state.submitFormText}
-          changeCurrentView={this.changeCurrentView}
           map={this.state.map}
           location={this.state.location}
         />
