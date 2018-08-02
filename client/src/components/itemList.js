@@ -28,7 +28,6 @@ class ItemList extends React.Component {
   render() {
     return (
       <ul>
-        {/* {this.state.data.map(item => this.renderItem(item))} */}
         <div class="row">
           <div class="col s12">
             <h3>Listings</h3>
@@ -37,7 +36,7 @@ class ItemList extends React.Component {
             {this.state.data.slice(0, this.state.data.length/2+1).map(item => this.renderItem(item))}
           </div>
           <div class="col s6">
-            {this.state.data.slice(this.state.data.length/2).map(item => this.renderItem(item))}
+            {this.state.data.slice(this.state.data.length/2+1).map(item => this.renderItem(item))}
           </div>
         </div>
       </ul>
