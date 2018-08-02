@@ -31,7 +31,6 @@ class ItemSubmitForm extends React.Component {
         /> <br />
 
         Location: <textarea
-        className="ItemInput"
         name="location"
         type="text"
         placeholder="Please type in the full address"
