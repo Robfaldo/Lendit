@@ -59,29 +59,3 @@ class UserSignInForm extends React.Component {
 }
 
 export default UserSignInForm;
-
-<div class="row" style={{width: "50%"}}>
-  <form class="col s12" id="signin-form" onSubmit={this.handleSubmit}>
-    <div class="row">
-      <div class="input-field col s12">
-        <input
-          placeholder="Username"
-          id="signin-username"
-          type="text"
-          name="username"
-          class="validate"/>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <input
-          placeholder="Password"
-          name="password"
-          id="password"
-          type="password"
-          class="validate"/>
-      </div>
-    </div>
-    <button type="submit" class="waves-effect waves-light btn">Sign Up </button>
-  </form>
-</div>
