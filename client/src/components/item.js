@@ -20,7 +20,6 @@ class Item extends React.Component {
       return this.props.userDetails['_id'] === this.props.currentBorrower;
     };
     this.mapChange = (event) => {
-      event.preventDefault();
       console.log("clicked");
       this.props.map.setView(this.props.location, 17);
     }
