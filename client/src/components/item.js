@@ -31,7 +31,7 @@ class Item extends React.Component {
         <li>
           <Card
             className='small'
-            header={<CardTitle style={{height:350, width:300}}
+            header={<CardTitle style={{ width:"inherit" }}
             image={this.state.imageUrl}>{this.props.itemName}</CardTitle>}
             actions={
               [<form className="itemButtons" onSubmit={this.props.handleItemReturn}>
@@ -54,7 +54,7 @@ class Item extends React.Component {
         <li>
           <Card
             className='small'
-            header={<CardTitle style={{height:350, width:300}}
+            header={<CardTitle style={{ width:"inherit"}}
             image={this.state.imageUrl}>{this.props.itemName}</CardTitle>}
             actions={
               [<form className="itemButtons" onSubmit={this.props.handleItemBorrow}>
@@ -77,7 +77,7 @@ class Item extends React.Component {
         <li>
           <Card
             className='small'
-            header={<CardTitle style={{height:350, width:300}}
+            header={<CardTitle style={{ width:"inherit" }}
             image={this.state.imageUrl}>{this.props.itemName}</CardTitle>}
             onClick={this.mapChange}
           >
