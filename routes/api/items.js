@@ -2,10 +2,8 @@ var express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
 const databaseUrl = require('../../database')
-
 require('../../models/item');
 require('../../models/user');
-
 const Item = mongoose.model('Item');
 const User = mongoose.model('User');
 
