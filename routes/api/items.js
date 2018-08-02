@@ -42,16 +42,17 @@ router.delete('/items', async (req, res, next) => {
 });
 
 router.put('/items/:item_id', async (req, res, next) => {
-  const borrowerId = req.body.borrowerId === undefined ? null : req.body.borrowerId
-  const borrower = borrowerId === null ? null : await User.findOne({ _id: req.body.borrowerId })
+  const isItemBeingBorrowed = !!req.body.borrowerId
+  const borrowerId = req.body.borrowerId
+  const borrower = isItemBeingBorrowed ? await User.findOne({ _id: req.body.borrowerId }) : undefined
   const itemToUpdate = await Item.findOne({ _id: req.params.item_id });
   const itemOwner = await User.findOne({ _id: itemToUpdate.owner });
   const isUpdated = Item.updateBorrower(
     itemToUpdate._id,
     borrowerId
   );
-  if (borrower) await User.updateKarmaPoints(itemOwner, 1);
-  if (borrower) await User.removeKarmaPoints(borrower, 1);
+  if (isItemBeingBorrowed) await User.updateKarmaPoints(itemOwner, 1);
+  if (isItemBeingBorrowed) await User.removeKarmaPoints(borrower, 1);
   if (isUpdated) return res.sendStatus(200);
   next();
 });

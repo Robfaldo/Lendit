@@ -127,6 +127,26 @@ describe('Server path /api/items', () => {
         assert.equal(borrowerAfterBorrow.karmaPoints, 9)
         assert.equal(ownerPostsItemResponse.status, 200);
       });
+      describe('When borrower Id is undefined in the JSON', () => {
+        it('does not update karma points and sets item borrower to undefined', async () => {
+          const borrower = await createUser({ firstName: 'Borrower'})
+          const owner = await createUser({ firstName: 'Owner'})
+          const newItem = await createItem('Kettle', owner)
+          const borrowerLogsIn = await logUserIn(borrower);
+
+          const ownerPostsItemResponse = await request(app)
+            .put(`/api/items/${newItem._id}`)
+            .send({ borrowerId: undefined });
+          const itemOwner = await User.findOne({ _id: newItem.owner._id })
+          const borrowerAfterBorrow = await User.findOne({ _id: borrower._id })
+          const itemAfterReturn = await Item.findOne({ _id: newItem._id })
+
+          assert.equal(itemOwner.karmaPoints, 10);
+          assert.equal(borrowerAfterBorrow.karmaPoints, 10)
+          assert.equal(itemAfterReturn.currentBorrower, undefined)
+          assert.equal(ownerPostsItemResponse.status, 200);
+        });
+      });
     });
   });
 });
