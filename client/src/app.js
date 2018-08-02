@@ -9,6 +9,7 @@ import {
 import ListingsPage from './containers/listingsPage';
 import Home from './containers/home';
 import NavBar from './components/navBar';
+import Footer from './components/footer';
 import Profile from './containers/profile';
 
 class App extends React.Component {
@@ -152,6 +153,11 @@ class App extends React.Component {
                 }
               }
             }
+          />
+          <Footer
+            loggedIn={this.state.loggedIn}
+            _logout={this._logout}
+            userDetails={this.state.user}
           />
         {/*</Switch>*/}
       {/*</BrowserRouter>*/}
