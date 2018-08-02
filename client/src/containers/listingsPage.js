@@ -86,28 +86,34 @@ class ListingsPage extends React.Component {
 
   render() {
     return(
-      <div>
-        <Map data={[
-          {coordinates: ["51.5146485", "-0.0668833310722988"], text: "this is a test marker"},
-        ]}
-             handleMapUpdate={this.handleMapUpdate}
-             currentView={this.state.currentView}
-             map={this.state.map}
-        />
-        <ItemSubmitForm
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-          handleFileChange={this.handleFileChange}
-          value={this.state.submitFormText}
-          changeCurrentView={this.changeCurrentView}
-          map={this.state.map}
-        />
-        <ItemList
-          userDetails={this.props.user}
-          itemsData={this.props.data}
-          handleItemBorrow={this.handleItemBorrow}
-          handleItemReturn={this.handleItemReturn}
-        />
+      <div class="row">
+        <div class="col s12">
+          <ItemSubmitForm
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            handleFileChange={this.handleFileChange}
+            value={this.state.submitFormText}
+            changeCurrentView={this.changeCurrentView}
+            map={this.state.map}
+          />
+        </div>
+        <div class="col s8">
+          <ItemList
+            userDetails={this.props.user}
+            itemsData={this.props.data}
+            handleItemBorrow={this.handleItemBorrow}
+            handleItemReturn={this.handleItemReturn}
+          />
+        </div>
+        <div class="col s4">
+          <Map data={[
+            {coordinates: ["51.5146485", "-0.0668833310722988"], text: "this is a test marker"},
+          ]}
+               handleMapUpdate={this.handleMapUpdate}
+               currentView={this.state.currentView}
+               map={this.state.map}
+          />
+        </div>
       </div>
     )
   }
