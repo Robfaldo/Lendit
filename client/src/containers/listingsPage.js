@@ -110,6 +110,7 @@ class ListingsPage extends React.Component {
              handleMapUpdate={this.handleMapUpdate}
              currentView={this.state.currentView}
              map={this.state.map}
+             itemsData={this.props.data}
         />
         <ItemSubmitForm
           handleChange={this.handleChange}
