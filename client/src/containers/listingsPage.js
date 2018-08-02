@@ -84,6 +84,7 @@ class ListingsPage extends React.Component {
       console.log("borower id",this.props.user["_id"]);
       console.log("item id", event.target.itemId.value);
       await axios.put(`/api/items/${itemId}`, { borrowerId : borrower})
+      await this.props.refreshUser();
       await this.props.getRequest();
       // event.target.reset();
     }
@@ -125,7 +126,7 @@ class ListingsPage extends React.Component {
         />
         </div>
         <div class="col s8">
-           
+
         <ItemList
           userDetails={this.props.user}
           itemsData={this.props.data}
