@@ -58,6 +58,7 @@ class ListingsPage extends React.Component {
       console.log("borower id",this.props.user["_id"]);
       console.log("item id", event.target.itemId.value);
       await axios.put(`/api/items/${itemId}`, { borrowerId : borrower})
+      await this.props.getRequest();
       // event.target.reset();
     }
 
@@ -66,7 +67,7 @@ class ListingsPage extends React.Component {
       const borrower = undefined;
       const itemId = event.target.itemId.value;
       await axios.put(`/api/items/${itemId}`, { borrowerId : borrower})
-      alert('successfully returned item!')
+      await this.props.getRequest();
     }
 
     this.handleMapUpdate = (map) => {
