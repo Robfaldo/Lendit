@@ -9,7 +9,7 @@ require('../../models/user');
 const Item = mongoose.model('Item');
 const User = mongoose.model('User');
 
-mongoose.connect(databaseUrl);
+mongoose.connect(databaseUrl, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -28,13 +28,11 @@ router.post('/items', async (req, res, next) => {
     };
     const newItem = new Item(itemToCreate);
     await newItem.save();
-    console.log(newItem["_id"]);
     res.send({
         success: true,
         message: 'Listing created',
         id: newItem["_id"]
     });
-    next();
 });
 
 router.delete('/items', async (req, res, next) => {

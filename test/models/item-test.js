@@ -17,7 +17,7 @@ describe('Item', () => {
       const itemToCreate = await createItem('Scissors');
 
       const newItem = await Item.findOne({ itemName: 'Scissors'});
-      
+
       assert.equal(newItem.itemName, itemToCreate.itemName);
       await disconnectFromDatabase();
     });
@@ -50,7 +50,8 @@ describe('Item', () => {
   });
   describe('#updateBorrower', () => {
     it('changes the currentBorrower to the new borrower', async () => {
-      const spy = sinon.spy(Item, 'findByIdAndUpdate');
+      // const myStub = sinon.stub(mongoose.Model, 'findByIdAndUpdate');
+      const stub = sinon.stub(Item, 'findByIdAndUpdate');
       const itemMock = {
         itemName: 'Toaster',
         id: '1'
@@ -61,12 +62,13 @@ describe('Item', () => {
       };
 
       Item.updateBorrower(itemMock._id, userMock);
-      const spyWithCorrectArgs = spy.withArgs(
+      const spyWithCorrectArgs = stub.withArgs(
         itemMock._id,
         { currentBorrower: userMock }
       );
 
       assert.equal(spyWithCorrectArgs.calledOnce, true);
+      stub.restore();
     });
   });
 });

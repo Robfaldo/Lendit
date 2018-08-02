@@ -14,7 +14,7 @@ const {
 describe('Server path /api/items', () => {
 
   beforeEach(async () => {
-    await mongoose.connect(`mongodb://${process.env.DB_USERNAME}:${process.env.DB_Password}@ds247001.mlab.com:47101/lendit-test`);
+    await mongoose.connect(`mongodb://${process.env.DB_USERNAME}:${process.env.DB_Password}@ds247001.mlab.com:47101/lendit-test`, { useNewUrlParser: true });
     await mongoose.connection.db.dropDatabase();
   });
 
@@ -52,6 +52,7 @@ describe('Server path /api/items', () => {
         .post('/api/items')
         .type('form')
         .send(itemToCreate)
+
       const newItem = await Item.findOne(itemToCreate);
 
       assert.equal(newItem.itemName, itemToCreate.itemName);
