@@ -28,6 +28,15 @@ class ItemSubmitForm extends React.Component {
           value={this.props.description}
         /> <br />
 
+        Location: <textarea
+        className="ItemInput"
+        name="location"
+        type="text"
+        placeholder="Please type in the full address"
+        onChange={this.props.handleChange}
+        value={this.props.location}
+      /> <br />
+
         Upload Image: <input
           type="file"
           accept=".jpg"

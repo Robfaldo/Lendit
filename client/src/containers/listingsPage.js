@@ -16,21 +16,47 @@ class ListingsPage extends React.Component {
       selectedFile: null,
       randomNumber: Math.floor(Math.random(1000000) * Math.floor(Math.pow(10,10))),
       currentView: [51.5146485, -0.0668833310722988],
+      location: '',
     };
     this.handleSubmit = async (event) => {
       event.preventDefault();
       let image = this.state.selectedFile ? this.state.randomNumber : "default";
+      await this.getLocation(this.state.location);
       await this.props.postRequest(
         {
           itemName: this.state.submitFormText,
           itemDescription: this.state.itemDescription,
           image: image,
           owner: this.props.user["_id"],
+          location: this.state.location,
         }
       );
       console.log(`User submitted: ${this.state.submitFormText}`);
       this.setState({submitFormText: ''});
       this.submitImage();
+    };
+
+    this.getLocation = async (location) => {
+      location = location.split(" ").join("%20");
+      let url = ` https://nominatim.openstreetmap.org/search/${location}?format=json&addressdetails=1&limit=1&polygon_svg=1`;
+      let data;
+      let state = this;
+      await axios.get(url)
+        .then(response => {
+          if(response.data.length !== 0) {
+            data = response.data[0];
+          } else {
+            console.log('received no data')
+          }
+        }).then(thing => {
+          let arr = [data.lat, data.lon];
+          console.log(arr);
+          state.setState({
+            location: arr,
+          });
+          return arr;
+        }
+      )
     };
 
     this.submitImage = () =>{
@@ -92,6 +118,7 @@ class ListingsPage extends React.Component {
           value={this.state.submitFormText}
           changeCurrentView={this.changeCurrentView}
           map={this.state.map}
+          location={this.state.location}
         />
         <ItemList
           itemsData={this.props.data}

@@ -20,7 +20,8 @@ router.get('/items', async (req, res) => {
 });
 
 router.post('/items', async (req, res, next) => {
-    const itemToCreate = {
+   console.log(req.body);
+  const itemToCreate = {
       itemName: req.body.itemName,
       itemDescription: req.body.itemDescription,
       image: req.body.image,
