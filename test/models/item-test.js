@@ -50,7 +50,6 @@ describe('Item', () => {
   });
   describe('#updateBorrower', () => {
     it('changes the currentBorrower to the new borrower', async () => {
-      // const myStub = sinon.stub(mongoose.Model, 'findByIdAndUpdate');
       const stub = sinon.stub(Item, 'findByIdAndUpdate');
       const itemMock = {
         itemName: 'Toaster',

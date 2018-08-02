@@ -32,7 +32,7 @@ UserSchema.pre('save', function(next) {
 
 const User = mongoose.model('User', UserSchema);
 
-User.updateKarmaPoints = async function(user, points) {
+User.updateKarmaPoints = async (user, points) => {
   return await User.findByIdAndUpdate(
     user._id,
     { karmaPoints: user.karmaPoints + points},
@@ -42,6 +42,19 @@ User.updateKarmaPoints = async function(user, points) {
       return true;
     }
   )
-}
+};
+
+
+User.removeKarmaPoints = async (user, points) => {
+  return await User.findByIdAndUpdate(
+    user._id,
+    { karmaPoints: user.karmaPoints - points},
+    {new: false},
+    (err, user) => {
+      if (err) return false;
+      return true;
+    }
+  )
+};
 
 module.exports = User;
