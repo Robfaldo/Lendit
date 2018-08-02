@@ -61,6 +61,14 @@ class ListingsPage extends React.Component {
       // event.target.reset();
     }
 
+    this.handleItemReturn = async (event) => {
+      event.preventDefault();
+      const borrower = undefined;
+      const itemId = event.target.itemId.value;
+      await axios.put(`/api/items/${itemId}`, { borrowerId : borrower})
+      alert('successfully returned item!')
+    }
+
     this.handleMapUpdate = (map) => {
       console.log("MAP UPDATE CALLED");
       console.log(map);
@@ -94,8 +102,10 @@ class ListingsPage extends React.Component {
           map={this.state.map}
         />
         <ItemList
+          userDetails={this.props.user}
           itemsData={this.props.data}
           handleItemBorrow={this.handleItemBorrow}
+          handleItemReturn={this.handleItemReturn}
         />
       </div>
     )

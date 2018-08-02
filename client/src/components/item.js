@@ -11,24 +11,71 @@ class Item extends React.Component {
       alert('Returning an item! =)');
       event.preventDefault();
     }
+    this.availableAndNotMine = () => {
+      let notMine = this.props.userDetails['_id'] !== this.props.owner;
+      let available = this.currentBorrower == undefined;
+      return notMine && available;
+    }
+    this.borrowedByMe = () => {
+      return this.props.userDetails['_id'] === this.props.currentBorrower;
+    }
   }
   render() {
-    return <li>
-            <Card
-              className='small'
-              header={<CardTitle style={{height:350, width:300}}
-              image={this.state.imageUrl}>{this.props.itemName}</CardTitle>}
-              actions={
-                [<form className="itemButtons" onSubmit={this.props.handleSubmit}>
-                <input name="itemId" type="hidden" value={this.props.itemId} />
-                <button type="submit" className="itemBorrow" name="itemBorrow">
-                  Borrow
-                </button>
-                </form>]
-              }>
-              {this.props.itemDescription}
-            </Card>
-          </li>
+    if (this.borrowedByMe()) {
+      return (
+        <li>
+          <Card
+            className='small'
+            header={<CardTitle style={{height:350, width:300}}
+            image={this.state.imageUrl}>{this.props.itemName}</CardTitle>}
+            actions={
+              [<form className="itemButtons" onSubmit={this.props.handleItemReturn}>
+              <input name="itemId" type="hidden" value={this.props.itemId} />
+              <button type="submit" className="itemReturn" name="itemReturn">
+                Return
+              </button>
+              </form>]
+            }>
+            {this.props.itemDescription}
+          </Card>
+        </li>
+      )
+    }
+
+    else if (this.availableAndNotMine()) {
+      return (
+        <li>
+          <Card
+            className='small'
+            header={<CardTitle style={{height:350, width:300}}
+            image={this.state.imageUrl}>{this.props.itemName}</CardTitle>}
+            actions={
+              [<form className="itemButtons" onSubmit={this.props.handleItemBorrow}>
+              <input name="itemId" type="hidden" value={this.props.itemId} />
+              <button type="submit" className="itemBorrow" name="itemBorrow">
+                Borrow
+              </button>
+              </form>]
+            }>
+            {this.props.itemDescription}
+          </Card>
+        </li>
+      )
+    }
+
+    else {
+      return (
+        <li>
+          <Card
+            className='small'
+            header={<CardTitle style={{height:350, width:300}}
+            image={this.state.imageUrl}>{this.props.itemName}</CardTitle>}
+          >
+            {this.props.itemDescription}
+          </Card>
+        </li>
+      )
+    }
   }
 }
 
