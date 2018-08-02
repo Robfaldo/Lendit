@@ -130,12 +130,13 @@ class App extends React.Component {
                       data={this.state.data}
                       getRequest={this.getItems}
                       postRequest={this.postItem}
+                      refreshUser={this.getUser}
                       user={this.state.user}
                     />
                   )
                 }
                 else {
-                  return <Home handleSignInSubmit={this._login}/>
+                  return <Home handleSignInSubmit={this._login} />
                 }
               }
             }
