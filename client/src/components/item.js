@@ -15,9 +15,14 @@ class Item extends React.Component {
       let notMine = this.props.userDetails['_id'] !== this.props.owner;
       let available = this.currentBorrower == undefined;
       return notMine && available;
-    }
+    };
     this.borrowedByMe = () => {
       return this.props.userDetails['_id'] === this.props.currentBorrower;
+    };
+    this.mapChange = (event) => {
+      event.preventDefault();
+      console.log("clicked");
+      this.props.map.setView(this.props.location, 17);
     }
   }
   render() {
@@ -35,7 +40,9 @@ class Item extends React.Component {
                 Return
               </button>
               </form>]
-            }>
+            }
+            onClick={this.mapChange}
+          >
             {this.props.itemDescription}
           </Card>
         </li>
@@ -56,7 +63,9 @@ class Item extends React.Component {
                 Borrow
               </button>
               </form>]
-            }>
+            }
+            onClick={this.mapChange}
+          >
             {this.props.itemDescription}
           </Card>
         </li>
@@ -70,6 +79,7 @@ class Item extends React.Component {
             className='small'
             header={<CardTitle style={{height:350, width:300}}
             image={this.state.imageUrl}>{this.props.itemName}</CardTitle>}
+            onClick={this.mapChange}
           >
             {this.props.itemDescription}
           </Card>
