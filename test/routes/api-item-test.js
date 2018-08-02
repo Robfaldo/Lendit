@@ -14,7 +14,7 @@ const {
 describe('Server path /api/items', () => {
 
   beforeEach(async () => {
-    await mongoose.connect(`mongodb://${process.env.DB_USERNAME}:${process.env.DB_Password}@ds247001.mlab.com:47101/lendit-test`);
+    await mongoose.connect(`mongodb://${process.env.DB_USERNAME}:${process.env.DB_Password}@ds247001.mlab.com:47101/lendit-test`, { useNewUrlParser: true });
     await mongoose.connection.db.dropDatabase();
   });
 
@@ -52,6 +52,7 @@ describe('Server path /api/items', () => {
         .post('/api/items')
         .type('form')
         .send(itemToCreate)
+
       const newItem = await Item.findOne(itemToCreate);
 
       assert.equal(newItem.itemName, itemToCreate.itemName);
@@ -110,7 +111,7 @@ describe('Server path /api/items', () => {
         assert.deepEqual(updatedItem.currentBorrower, borrower._id);
         assert.equal(borrowResponse.status, 200);
       });
-      it('gives the owner of the item a karma point', async () => {
+      it('updates karma points', async () => {
         const borrower = await createUser({ firstName: 'Borrower'})
         const owner = await createUser({ firstName: 'Owner'})
         const newItem = await createItem('Kettle', owner)
@@ -120,8 +121,10 @@ describe('Server path /api/items', () => {
           .put(`/api/items/${newItem._id}`)
           .send({ borrowerId: borrower._id });
         const itemOwner = await User.findOne({ _id: newItem.owner._id })
+        const borrowerAfterBorrow = await User.findOne({ _id: borrower._id })
 
         assert.equal(itemOwner.karmaPoints, 11);
+        assert.equal(borrowerAfterBorrow.karmaPoints, 9)
         assert.equal(ownerPostsItemResponse.status, 200);
       });
     });

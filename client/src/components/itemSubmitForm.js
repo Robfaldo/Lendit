@@ -17,6 +17,7 @@ class ItemSubmitForm extends React.Component {
           placeholder="Item Name"
           onChange={this.props.handleChange}
           value={this.props.itemName}
+          required
         /><br />
 
         ItemDescription: <textarea
@@ -26,7 +27,17 @@ class ItemSubmitForm extends React.Component {
           placeholder="Please type in the item description here"
           onChange={this.props.handleChange}
           value={this.props.description}
+          required
         /> <br />
+
+        Location: <textarea
+        name="location"
+        type="text"
+        placeholder="Please type in the full address"
+        onChange={this.props.handleChange}
+        value={this.props.location}
+        required
+      /> <br />
 
         Upload Image: <input
           type="file"

@@ -23,7 +23,7 @@ require('./models/user');
 const User = mongoose.model('User');
 
 // connect to the database
-mongoose.connect(databaseUrl);
+mongoose.connect(databaseUrl, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));

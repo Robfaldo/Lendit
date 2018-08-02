@@ -2,14 +2,12 @@ var express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
 const databaseUrl = require('../../database')
-
 require('../../models/item');
 require('../../models/user');
-
 const Item = mongoose.model('Item');
 const User = mongoose.model('User');
 
-mongoose.connect(databaseUrl);
+mongoose.connect(databaseUrl, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -20,21 +18,21 @@ router.get('/items', async (req, res) => {
 });
 
 router.post('/items', async (req, res, next) => {
-    const itemToCreate = {
+   console.log(req.body);
+  const itemToCreate = {
       itemName: req.body.itemName,
       itemDescription: req.body.itemDescription,
       image: req.body.image,
-      owner: req.body.owner
+      owner: req.body.owner,
+      location: req.body.location,
     };
     const newItem = new Item(itemToCreate);
     await newItem.save();
-    console.log(newItem["_id"]);
     res.send({
         success: true,
         message: 'Listing created',
         id: newItem["_id"]
     });
-    next();
 });
 
 router.delete('/items', async (req, res, next) => {
@@ -45,14 +43,15 @@ router.delete('/items', async (req, res, next) => {
 
 router.put('/items/:item_id', async (req, res, next) => {
   const borrowerId = req.body.borrowerId
+  const borrower = await User.findOne({ _id: req.body.borrowerId })
   const itemToUpdate = await Item.findOne({ _id: req.params.item_id });
   const itemOwner = await User.findOne({ _id: itemToUpdate.owner });
-
   const isUpdated = Item.updateBorrower(
     itemToUpdate._id,
     borrowerId
   );
-  await User.updateKarmaPoints(itemOwner, 1)
+  await User.updateKarmaPoints(itemOwner, 1);
+  await User.removeKarmaPoints(borrower, 1);
   if (isUpdated) return res.sendStatus(200);
   next();
 });
