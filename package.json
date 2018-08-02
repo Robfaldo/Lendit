@@ -34,7 +34,7 @@
   "scripts": {
     "start": "node app.js",
     "heroku-postbuild": "export NODE_ENV='lendit-prod' && cd client && npm install && npm run build",
-    "test": "export DB_ENV='test' && nyc --reporter=html --reporter=text mocha --recursive --exit && export DB_ENV=development"
+    "test": "export DB_ENV='test' && nyc --reporter=html --reporter=text mocha --timeout 5000 --recursive --exit && export DB_ENV=development"
   },
   "repository": {
     "type": "git",

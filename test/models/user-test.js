@@ -31,5 +31,22 @@ describe('User', () => {
       assert.equal(stub.withArgs(ownerMock._id, { karmaPoints: ownerMock.karmaPoints + 1 }).calledOnce, true)
       stub.restore();
     });
+    it('removes a karma point from the borrower', async () => {
+      const stub = sinon.stub(User, 'findByIdAndUpdate');
+      const borrowerMock = {
+        'firstName': "Owner",
+        'lastName': "Faldo",
+        'email': "robertfaldo@gmail.com",
+        'username': "rfaldo",
+        'password': "validpassword123",
+        'karmaPoints': '10',
+        '_id': '1'
+      };
+
+      User.removeKarmaPoints(borrowerMock, 1);
+
+      assert.equal(stub.withArgs(borrowerMock._id, { karmaPoints: borrowerMock.karmaPoints - 1 }).calledOnce, true)
+      stub.restore();
+    });
   });
 });
