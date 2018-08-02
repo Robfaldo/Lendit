@@ -5,7 +5,7 @@ const app = require('../app');
 const request = require('supertest');
 
 const connectToAndDropDatabase = async () => {
-  await mongoose.connect(`mongodb://${process.env.DB_USERNAME}:${process.env.DB_Password}@ds247001.mlab.com:47101/lendit-test`);
+  await mongoose.connect(`mongodb://${process.env.DB_USERNAME}:${process.env.DB_Password}@ds247001.mlab.com:47101/lendit-test`, { useNewUrlParser: true });
   await mongoose.connection.db.dropDatabase();
 }
 
