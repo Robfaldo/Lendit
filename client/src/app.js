@@ -5,10 +5,12 @@ import {
   Route,
   // Switch
 } from 'react-router-dom';
+import './app.css';
 
 import ListingsPage from './containers/listingsPage';
 import Home from './containers/home';
 import NavBar from './components/navBar';
+import Footer from './components/footer';
 import Profile from './containers/profile';
 
 class App extends React.Component {
@@ -109,14 +111,17 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="all">
         {/*<BrowserRouter>*/}
         {/*<Switch>*/}
+        <header className="header">
           <NavBar
             loggedIn={this.state.loggedIn}
             _logout={this._logout}
             userDetails={this.state.user}
           />
+        </header>
+        <main className="main">
           <Route exact path="/" component={
               () => {
                 if (this.state.loggedIn) {
@@ -153,6 +158,14 @@ class App extends React.Component {
               }
             }
           />
+        </main>
+        <footer>
+          <Footer
+            loggedIn={this.state.loggedIn}
+            _logout={this._logout}
+            userDetails={this.state.user}
+          />
+        </footer>
         {/*</Switch>*/}
       {/*</BrowserRouter>*/}
       </div>
