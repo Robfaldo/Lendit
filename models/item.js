@@ -23,6 +23,9 @@ const ItemSchema = new mongoose.Schema({
   image: {
     type: String,
     default: "default",
+  },
+  location: {
+    type: [Number],
   }
 });
 

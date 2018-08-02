@@ -20,11 +20,13 @@ router.get('/items', async (req, res) => {
 });
 
 router.post('/items', async (req, res, next) => {
-    const itemToCreate = {
+   console.log(req.body);
+  const itemToCreate = {
       itemName: req.body.itemName,
       itemDescription: req.body.itemDescription,
       image: req.body.image,
-      owner: req.body.owner
+      owner: req.body.owner,
+      location: req.body.location,
     };
     const newItem = new Item(itemToCreate);
     await newItem.save();

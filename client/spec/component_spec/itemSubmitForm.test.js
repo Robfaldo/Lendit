@@ -17,8 +17,8 @@ describe('ItemSubmitForm', () => {
       expect(itemSubmitForm.find('#item_name').length).toEqual(1);
     });
 
-    it('renders a text description field', () => {
-      expect(itemSubmitForm.find('textarea').length).toEqual(1);
+    it('renders two text areas field', () => {
+      expect(itemSubmitForm.find('textarea').length).toEqual(2);
     });
 
     it('renders a button', () => {
@@ -37,7 +37,7 @@ describe('ItemSubmitForm', () => {
     });
 
     it('textarea handles change properly', () => {
-      itemSubmitForm.find('textarea').simulate('change');
+      itemSubmitForm.find('.ItemInput').simulate('change');
       expect(mockTextChange.mock.calls.length).toEqual(1);
     });
   });
