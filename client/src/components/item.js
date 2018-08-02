@@ -32,7 +32,6 @@ class Item extends React.Component {
               [<form className="itemButtons" onSubmit={this.props.handleItemReturn}>
               <input name="itemId" type="hidden" value={this.props.itemId} />
               <button class="btn waves-effect waves-light" type="submit" name="itemReturn">
-                <i class="material-icons">add</i>
                 Return
               </button>
               </form>]
@@ -54,7 +53,6 @@ class Item extends React.Component {
               [<form className="itemButtons" onSubmit={this.props.handleItemBorrow}>
               <input name="itemId" type="hidden" value={this.props.itemId} />
               <button class="btn waves-effect waves-light" type="submit" name="itemBorrow">
-                <i class="material-icons">remove</i>
                 Borrow
               </button>
               </form>]
