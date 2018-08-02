@@ -28,7 +28,7 @@ class ListingsPage extends React.Component {
           itemDescription: this.state.itemDescription,
           image: image,
           owner: this.props.user["_id"],
-          location: this.state.location,
+          location: this.state.location ,
         }
       );
       console.log(`User submitted: ${this.state.submitFormText}`);
@@ -49,7 +49,7 @@ class ListingsPage extends React.Component {
             console.log('received no data')
           }
         }).then(thing => {
-          let arr = [data.lat, data.lon];
+          let arr = data ? [data.lat, data.lon] : [51.5146485, -0.0668833310722988];
           console.log(arr);
           state.setState({
             location: arr,
