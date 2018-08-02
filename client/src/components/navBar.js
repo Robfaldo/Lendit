@@ -11,7 +11,7 @@ const NavBar = props => {
             <ul id="nav-mobile" class="right hide-on-med-and-down">
               <li><Link to="/profile"> Profile </Link>Sass</li>
               <li ><Link to="/"> Listings </Link></li>
-              <li><Link to="#" onClick={props._logout}> Logout </Link></li>
+              <li><Link to="#" onClick={props._logout}><i class="material-icons right">account_circle</i> Logout </Link></li>
             </ul>
           </div>
       </nav>
