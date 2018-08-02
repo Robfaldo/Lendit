@@ -6,28 +6,19 @@ class UserSignUpForm extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      username: '',
-      password: '',
       redirectTo: null,
     }
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value,
-    })
-  };
 
   handleSubmit(event) {
     event.preventDefault();
     axios.post('/auth/signup', {
-      username: this.state.username,
-      password: this.state.password,
+      username: event.target.username.value,
+      password: event.target.password.value,
+      firstName: event.target.firstName.value,
+      lastName: event.target.lastName.value,
+      email: event.target.email.value
     })
       .then(response => {
         console.log(response);
@@ -63,8 +54,6 @@ class UserSignUpForm extends React.Component {
           name="firstName"
           type="text"
           placeholder="First Name"
-          value={this.state.firstName}
-          onChange={this.handleChange}
         /><br />
 
         Last Name <input
@@ -72,8 +61,6 @@ class UserSignUpForm extends React.Component {
           name="lastName"
           type="text"
           placeholder="Last Name"
-          value={this.state.lastName}
-          onChange={this.handleChange}
         /><br />
 
         Username<input
@@ -81,8 +68,6 @@ class UserSignUpForm extends React.Component {
           name="username"
           type="text"
           placeholder="Username"
-          value={this.state.username}
-          onChange={this.handleChange}
         /><br />
 
         Email<input
@@ -90,8 +75,6 @@ class UserSignUpForm extends React.Component {
           name="email"
           type="email"
           placeholder="Email"
-          value={this.state.email}
-          onChange={this.handleChange}
         /><br />
 
         Password <input
@@ -99,8 +82,6 @@ class UserSignUpForm extends React.Component {
         name="password"
         type="password"
         placeholder="Password"
-        value={this.state.password}
-        onChange={this.handleChange}
       />
         <button type="submit" className="SubmitButton">Sign Up </button>
       </form>

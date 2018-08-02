@@ -6,9 +6,10 @@ import {
   // Switch
 } from 'react-router-dom';
 
-import ListingsPage from './components/listingsPage';
+import ListingsPage from './containers/listingsPage';
 import Home from './containers/home';
 import NavBar from './components/navBar';
+import Profile from './containers/profile';
 
 class App extends React.Component {
   constructor(props) {
@@ -117,19 +118,41 @@ class App extends React.Component {
             userDetails={this.state.user}
           />
           <Route exact path="/" component={
-            ()=> {
-              if(this.state.loggedIn){
-                return <ListingsPage
-                  data={this.state.data}
-                  getRequest={this.getItems}
-                  postRequest={this.postItem}
-                  user={this.state.user}
-                />
-              } else{
-                return <Home handleSignInSubmit={this._login}/>
+              () => {
+                if (this.state.loggedIn) {
+                  return (
+                    <ListingsPage
+                      data={this.state.data}
+                      getRequest={this.getItems}
+                      postRequest={this.postItem}
+                      user={this.state.user}
+                    />
+                  )
+                }
+                else {
+                  return <Home handleSignInSubmit={this._login}/>
+                }
               }
             }
-          } />
+          />
+          <Route exact path="/profile" component={
+              () => {
+                if (this.state.loggedIn) {
+                  return (
+                    <Profile
+                      userDetails={this.state.user}
+                      itemsData={this.props.data}
+                    />
+                  )
+                }
+                else {
+                  return (
+                    <Home handleSignInSubmit={this._login} />
+                  )
+                }
+              }
+            }
+          />
         {/*</Switch>*/}
       {/*</BrowserRouter>*/}
       </div>

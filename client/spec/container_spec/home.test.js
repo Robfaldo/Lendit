@@ -11,25 +11,15 @@ const home = Enzyme.shallow(
 );
 
 describe('Home', () => {
-  describe('subordinate components', () => {
-    it('has a sign up component', () => {
-      expect(home.find('UserSignUpForm').length).toEqual(1);
-    })
-
-    it('has a sign in component', () => {
-      expect((home).find('UserSignInForm').length).toEqual(1);
-    })
+  it('has a homepage title component', () => {
+    expect(home.find('HomepageTitle').length).toEqual(1);
   })
 
-  describe('handling form submissions', () => {
-    it('sign up form submission callback is passed on as a prop', () => {
-      expect(home.find('UserSignUpForm').props().handleSubmit)
-        .toBe(mockSignUpSubmit);
-    })
+  it('has a homepage display component', () => {
+    expect((home).find('HomepageDisplay').length).toEqual(1);
+  })
 
-    it('sign in form submission callback is passed on as a prop', () => {
-      expect(home.find('UserSignInForm').props().handleSubmit)
-        .toBe(mockSignInSubmit);
-    })
+  it('has a homepage display toggle component', () => {
+    expect(home.find('HomepageDisplayToggle').length).toEqual(1);
   })
 })
