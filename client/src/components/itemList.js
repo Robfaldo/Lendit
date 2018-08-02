@@ -19,6 +19,8 @@ class ItemList extends React.Component {
           userDetails={this.props.userDetails}
           handleItemBorrow={this.props.handleItemBorrow}
           handleItemReturn={this.props.handleItemReturn}
+          location={itemData.location}
+          map={this.props.map}
         />
       )
     }

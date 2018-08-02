@@ -131,6 +131,7 @@ class ListingsPage extends React.Component {
           location={this.state.location}
         />
         <ItemList
+          map={this.state.map}
           userDetails={this.props.user}
           itemsData={this.props.data}
           handleItemBorrow={this.handleItemBorrow}
