@@ -11,6 +11,7 @@ const item = Enzyme.shallow(
     itemName={'ostrich egg'}
     itemDescription={'extremely rare'}
     itemImage={null}
+    userDetails={{_id: 1234}}
   />)
 
 describe('Item', () => {

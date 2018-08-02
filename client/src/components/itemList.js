@@ -6,14 +6,19 @@ class ItemList extends React.Component {
     super(props);
     this.state = {data: this.props.itemsData};
     this.renderItem = (itemData) => {
+      console.log(itemData);
       return (
         <Item
           key={itemData._id}
+          owner={itemData.owner}
+          currentBorrower={itemData.currentBorrower}
           itemId={itemData._id}
           itemName={itemData.itemName}
           itemDescription={itemData.itemDescription}
           image={itemData.image}
-          handleSubmit={this.props.handleItemBorrow}
+          userDetails={this.props.userDetails}
+          handleItemBorrow={this.props.handleItemBorrow}
+          handleItemReturn={this.props.handleItemReturn}
         />
       )
     }
