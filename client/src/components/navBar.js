@@ -17,9 +17,9 @@ const NavBar = props => {
       </nav>
     )
   } else {
-    return(<div>
+    return(<nav>
 
-    </div>)
+    </nav>)
   }
 };
 
