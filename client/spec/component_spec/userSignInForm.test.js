@@ -24,7 +24,7 @@ describe('SignInForm', () => {
     })
 
     it('has a password field', () => {
-      expect((signInForm).find('#signin-password').length).toEqual(1);
+      expect((signInForm).find('#password').length).toEqual(1);
     })
   })
 
