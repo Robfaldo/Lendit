@@ -2,7 +2,10 @@ import React from 'react';
 
 function HomepageTitle(props) {
   return (
-    <h1>Lendit</h1>
+    <div style={{paddingBottom: "1.8em"}}>
+      <h1>Lendit</h1>
+      <p style={{fontStyle: "italic"}}>A platform for sharing items</p>
+    </div>
   )
 }
 
