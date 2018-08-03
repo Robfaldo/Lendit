@@ -114,7 +114,6 @@ class ListingsPage extends React.Component {
   render() {
     return(
       <div class="row">
-        <div class="col s12">
           <ItemSubmitForm
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
@@ -124,7 +123,6 @@ class ListingsPage extends React.Component {
           map={this.state.map}
           location={this.state.location}
         />
-        </div>
         <div class="col s8">
 
         <ItemList
