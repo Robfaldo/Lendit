@@ -17,7 +17,7 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container" style={{textAlign: "center"}}>
         <HomepageTitle />
         <HomepageDisplay
           displayToggleState={this.state.displayToggleState}

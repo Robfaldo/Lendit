@@ -2,11 +2,13 @@ import React from 'react';
 
 function HomepageDisplayToggle(props) {
   return (
-    <form onSubmit={props.handleToggle}>
-      <input type="button" value="sign-up" onClick={props.handleToggle} />
-      <input type="button" value="sign-in" onClick={props.handleToggle} />
-      <input type="button" value="about" onClick={props.handleToggle} />
-    </form>
+    <div className="Toggle" style={{ display: "inline-block", paddingTop: "3em" }}>
+      <form onSubmit={props.handleToggle}>
+        <input type="button" class="waves-effect waves-light btn" value="sign-up" onClick={props.handleToggle} />
+        <input type="button" class="waves-effect waves-light btn" value="sign-in" onClick={props.handleToggle} />
+        <input type="button" class="waves-effect waves-light btn" value="about" onClick={props.handleToggle} />
+      </form>
+    </div>
   )
 }
 
